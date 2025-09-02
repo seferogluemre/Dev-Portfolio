@@ -19,4 +19,3 @@ export default function AboutPage() {
 
 export type { AboutData } from "./types";
 export { AboutSection };
-
