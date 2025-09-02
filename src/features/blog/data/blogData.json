@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "slug": "react-native-ile-mobil-uygulama-gelistirme",
+      "title": "React Native ile Mobil Uygulama Geliştirme",
+      "description": "React Native kullanarak cross-platform mobil uygulamalar geliştirme sürecini ve öğrendiklerimi paylaşıyorum. Performance optimizasyonu, state management ve native modüller hakkında detaylı bir rehber.",
+      "content": "React Native ile mobil uygulama geliştirme sürecinde karşılaştığım zorluklar ve çözümler...",
+      "date": "15 Aralık 2024",
+      "readTime": "8 dk okuma",
+      "tags": ["React Native", "Mobile Development", "JavaScript", "Cross-Platform"],
+      "image": null
+    },
+    {
+      "slug": "typescript-ve-react-best-practices",
+      "title": "TypeScript ve React Best Practices",
+      "description": "TypeScript ile React uygulamaları geliştirirken kullandığım best practice'leri ve type safety konularını ele alıyorum. Interface'ler, generic'ler ve utility type'lar hakkında pratik örnekler.",
+      "content": "TypeScript ile React geliştirme sürecinde type safety sağlamak için kullandığım yöntemler...",
+      "date": "10 Aralık 2024",
+      "readTime": "12 dk okuma",
+      "tags": ["TypeScript", "React", "Best Practices", "Frontend"],
+      "image": null
+    },
+    {
+      "slug": "nodejs-ve-express-api-gelistirme",
+      "title": "Node.js ve Express ile API Geliştirme",
+      "description": "Node.js ve Express.js kullanarak RESTful API geliştirme sürecini anlatıyorum. Authentication, validation, error handling ve database entegrasyonu konularını kapsamlı bir şekilde ele alıyorum.",
+      "content": "Node.js ve Express.js ile güvenli ve ölçeklenebilir API'ler geliştirme sürecinde öğrendiklerim...",
+      "date": "5 Aralık 2024",
+      "readTime": "15 dk okuma",
+      "tags": ["Node.js", "Express", "API", "Backend", "JavaScript"],
+      "image": null
+    },
+    {
+      "slug": "tailwind-css-ile-modern-ui-tasarimi",
+      "title": "Tailwind CSS ile Modern UI Tasarımı",
+      "description": "Tailwind CSS kullanarak modern ve responsive web arayüzleri tasarlama tekniklerini paylaşıyorum. Utility-first yaklaşımı, custom component'ler ve design system oluşturma süreçlerini ele alıyorum.",
+      "content": "Tailwind CSS ile hızlı ve tutarlı UI geliştirme sürecinde kullandığım teknikler ve öneriler...",
+      "date": "1 Aralık 2024",
+      "readTime": "10 dk okuma",
+      "tags": ["Tailwind CSS", "UI/UX", "CSS", "Frontend"],
+      "image": null
+    },
+    {
+      "slug": "docker-ve-containerization",
+      "title": "Docker ile Containerization",
+      "description": "Docker kullanarak uygulamaları containerize etme sürecini ve deployment stratejilerini anlatıyorum. Dockerfile optimizasyonu, multi-stage builds ve production deployment konularını ele alıyorum.",
+      "content": "Docker ile uygulama containerization sürecinde öğrendiğim best practice'ler ve deployment stratejileri...",
+      "date": "25 Kasım 2024",
+      "readTime": "14 dk okuma",
+      "tags": ["Docker", "DevOps", "Containerization", "Deployment"],
+      "image": null
+    }
+  ]
+}
