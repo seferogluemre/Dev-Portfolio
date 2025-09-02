@@ -96,7 +96,7 @@ export class GitHubService {
     return {
       id: repo.id.toString(),
       title: this.formatRepoName(repo.name),
-      description: repo.description || 'GitHub repository açıklaması mevcut değil.',
+              description: repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`,
       technologies: [...new Set(technologies)], 
       githubUrl: repo.html_url,
       liveUrl: repo.homepage || undefined,
@@ -130,8 +130,9 @@ export class GitHubService {
         !repo.archived
       );
 
+      // Son commit tarihine göre sırala (pushed_at)
       filteredRepos.sort((a, b) => 
-        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
       );
 
       return filteredRepos.map(repo => this.mapRepositoryToProject(repo));

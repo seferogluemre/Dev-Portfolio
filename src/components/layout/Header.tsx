@@ -29,7 +29,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
             <Image
-              src={theme === "light" ? "/logo-bg-black.svg" : "/logo-bg.svg"}
+              src={theme === "light" ? "/emre-seferoglu-light-logo.svg" : "/emre-seferoglu-dark-logo.svg"}
               alt="Logo"
               width={40}
               height={40}

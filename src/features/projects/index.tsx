@@ -4,13 +4,22 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { useLanguage } from "@/hooks";
 import { ProjectCard } from "./components/project-card";
+import { ProjectFilters } from "./components/ProjectFilters";
 import { useGitHubProjects } from "./hooks/useGitHubProjects";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ProjectData } from "./types";
 
 export default function ProjectsPage() {
   const { t } = useLanguage();
   const { projects, loading, error, refetch } = useGitHubProjects();
+  const [filteredProjects, setFilteredProjects] = useState<ProjectData[]>([]);
+
+  // Projeler yüklendiğinde filtrelenmiş projeleri güncelle
+  useEffect(() => {
+    setFilteredProjects(projects);
+  }, [projects]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -73,21 +82,47 @@ export default function ProjectsPage() {
             </div>
           )}
 
+          {/* Search and Filters */}
+          {!loading && !error && projects.length > 0 && (
+            <ProjectFilters 
+              projects={projects} 
+              onFilter={setFilteredProjects} 
+            />
+          )}
+
+          {/* Projects Grid */}
           {!loading && !error && projects.length > 0 && (
             <>
+            {/* Projects Summary */}
+            <div className="text-center mb-6">
+                <p className="text-sm text-muted-foreground">
+                  {filteredProjects.length === projects.length 
+                    ? `Toplam ${projects.length} proje`
+                    : `${filteredProjects.length} / ${projects.length} proje gösteriliyor`
+                  }
+                </p>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {projects.map((project) => (
+                {filteredProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
                 ))}
               </div>
-              
-              {/* Projects Summary */}
-              <div className="text-center mt-12 pt-8 border-t border-border">
-                <p className="text-sm text-muted-foreground">
-                  Toplam {projects.length} 
+            </>
+          )}
+
+          {/* No Results */}
+          {!loading && !error && projects.length > 0 && filteredProjects.length === 0 && (
+            <div className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <AlertCircle className="h-8 w-8 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold mb-2">
+                  Sonuç Bulunamadı
+                </h3>
+                <p className="text-muted-foreground">
+                  Arama kriterlerinize uygun proje bulunamadı. Farklı anahtar kelimeler veya filtreler deneyin.
                 </p>
               </div>
-            </>
+            </div>
           )}
 
           {!loading && !error && projects.length === 0 && (
