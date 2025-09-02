@@ -1,4 +1,4 @@
-import { GitHubRepository, GitHubApiError, GitHubContributions, ContributionStats, ContributionDay } from '../types/github';
+import { GitHubRepository, GitHubApiError, GitHubContributions, ContributionStats, ContributionDay, PinnedRepository, GitHubPinnedResponse, GitHubCombinedResponse } from '../types/github';
 import { ProjectData } from '../types';
 import { PINNED_REPO_IDS, PINNED_REPO_ORDER, PINNED_REPO_DESCRIPTIONS, PINNED_REPO_TAGS } from '../config/pinnedRepos';
 
@@ -17,6 +17,98 @@ const CONTRIBUTIONS_QUERY = `
               date
               contributionCount
               color
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const PINNED_REPOS_QUERY = `
+  query($username: String!) {
+    user(login: $username) {
+      pinnedItems(first: 6, types: [REPOSITORY]) {
+        nodes {
+          ... on Repository {
+            id
+            name
+            description
+            url
+            homepageUrl
+            stargazerCount
+            forkCount
+            primaryLanguage {
+              name
+              color
+            }
+            repositoryTopics(first: 20) {
+              nodes {
+                topic {
+                  name
+                }
+              }
+            }
+            createdAt
+            updatedAt
+            pushedAt
+            isPrivate
+            isFork
+            isArchived
+            licenseInfo {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const COMBINED_QUERY = `
+  query($username: String!) {
+    user(login: $username) {
+      contributionsCollection {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              date
+              contributionCount
+              color
+            }
+          }
+        }
+      }
+      pinnedItems(first: 6, types: [REPOSITORY]) {
+        nodes {
+          ... on Repository {
+            id
+            name
+            description
+            url
+            homepageUrl
+            stargazerCount
+            forkCount
+            primaryLanguage {
+              name
+              color
+            }
+            repositoryTopics(first: 20) {
+              nodes {
+                topic {
+                  name
+                }
+              }
+            }
+            createdAt
+            updatedAt
+            pushedAt
+            isPrivate
+            isFork
+            isArchived
+            licenseInfo {
+              name
             }
           }
         }
@@ -406,6 +498,165 @@ export class GitHubService {
       mostActiveDay: 'Çarşamba',
       contributions
     };
+  }
+
+  // GraphQL ile pinned repositories çekme
+  async getPinnedRepositories(): Promise<ProjectData[]> {
+    try {
+      const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+      
+      if (!token || token.trim() === '') {
+        console.log('GitHub token bulunamadı, fallback to manual pinned repos...');
+        return this.getFallbackPinnedProjects();
+      }
+
+      const response = await fetch(GITHUB_GRAPHQL_API, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: PINNED_REPOS_QUERY,
+          variables: { username: USERNAME }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`GitHub GraphQL API Error: ${response.status}`);
+      }
+
+      const data: { data: GitHubPinnedResponse } = await response.json();
+      return this.processPinnedRepositories(data.data.user.pinnedItems.nodes);
+    } catch (error) {
+      console.error('GitHub pinned repositories alınırken hata:', error);
+      console.log('Hata nedeniyle fallback pinned repos kullanılıyor...');
+      return this.getFallbackPinnedProjects();
+    }
+  }
+
+  // GraphQL ile contributions ve pinned repos birlikte çekme
+  async getCombinedData(): Promise<{ contributions: ContributionStats; pinnedProjects: ProjectData[] }> {
+    try {
+      const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+      
+      if (!token || token.trim() === '') {
+        console.log('GitHub token bulunamadı, mock data kullanılıyor...');
+        return {
+          contributions: this.getMockContributions(),
+          pinnedProjects: await this.getFallbackPinnedProjects()
+        };
+      }
+
+      const response = await fetch(GITHUB_GRAPHQL_API, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: COMBINED_QUERY,
+          variables: { username: USERNAME }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`GitHub GraphQL API Error: ${response.status}`);
+      }
+
+      const data: { data: GitHubCombinedResponse } = await response.json();
+      
+      return {
+        contributions: this.processContributionData(data.data),
+        pinnedProjects: this.processPinnedRepositories(data.data.user.pinnedItems.nodes)
+      };
+    } catch (error) {
+      console.error('GitHub combined data alınırken hata:', error);
+      return {
+        contributions: this.getMockContributions(),
+        pinnedProjects: await this.getFallbackPinnedProjects()
+      };
+    }
+  }
+
+  private processPinnedRepositories(pinnedRepos: PinnedRepository[]): ProjectData[] {
+    return pinnedRepos
+      .filter(repo => !repo.isPrivate && !repo.isFork && !repo.isArchived)
+      .map(repo => this.mapPinnedRepoToProject(repo));
+  }
+
+  private mapPinnedRepoToProject(repo: PinnedRepository): ProjectData {
+    const technologies: string[] = [];
+    
+    if (repo.primaryLanguage) {
+      technologies.push(repo.primaryLanguage.name);
+    }
+    
+    if (repo.repositoryTopics.nodes.length > 0) {
+      const topics = repo.repositoryTopics.nodes
+        .map(node => node.topic.name)
+        .filter(topic => !['project', 'app', 'website', 'portfolio', 'demo'].includes(topic.toLowerCase()));
+      technologies.push(...topics);
+    }
+
+    const lastUpdate = new Date(repo.updatedAt);
+    const monthsAgo = (Date.now() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24 * 30);
+    
+    let status: ProjectData['status'] = 'completed';
+    if (monthsAgo > 6) {
+      status = 'completed';
+    } else if (monthsAgo > 1) {
+      status = 'completed';
+    } else {
+      status = 'in-progress';
+    }
+
+    return {
+      id: repo.id,
+      title: this.formatRepoName(repo.name),
+      description: repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`,
+      technologies: [...new Set(technologies)],
+      githubUrl: repo.url,
+      liveUrl: repo.homepageUrl || undefined,
+      status,
+      date: repo.createdAt,
+      featured: true, // Pinned repos are always featured
+      starCount: repo.stargazerCount,
+      forkCount: repo.forkCount,
+      language: repo.primaryLanguage?.name || null,
+      topics: repo.repositoryTopics.nodes.map(node => node.topic.name),
+      lastUpdated: repo.updatedAt,
+      isPrivate: repo.isPrivate,
+      license: repo.licenseInfo?.name || null
+    };
+  }
+
+  private async getFallbackPinnedProjects(): Promise<ProjectData[]> {
+    // Mevcut manual pinned repos sistemini kullan
+    const allProjects = await this.getAllProjects();
+    return allProjects.filter(project => PINNED_REPO_IDS.includes(Number(project.id)));
+  }
+
+  // Updated getPinnedAndOtherProjects to use GraphQL
+  async getPinnedAndOtherProjectsWithGraphQL(): Promise<{ pinned: ProjectData[]; others: ProjectData[] }> {
+    try {
+      const [pinnedProjects, allProjects] = await Promise.all([
+        this.getPinnedRepositories(),
+        this.getAllProjects()
+      ]);
+
+      // Get pinned repo IDs from GraphQL response
+      const pinnedIds = pinnedProjects.map(p => p.id);
+      
+      // Filter out pinned projects from all projects
+      const others = allProjects.filter(project => !pinnedIds.includes(project.id));
+
+      return { pinned: pinnedProjects, others };
+    } catch (error) {
+      console.error('GraphQL pinned projects alınırken hata:', error);
+      // Fallback to old method
+      return this.getPinnedAndOtherProjects();
+    }
   }
 }
 

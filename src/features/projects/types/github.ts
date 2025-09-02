@@ -86,6 +86,17 @@ export interface GitHubContributions {
   };
 }
 
+export interface GitHubCombinedResponse {
+  user: {
+    contributionsCollection: {
+      contributionCalendar: ContributionCalendar;
+    };
+    pinnedItems: {
+      nodes: PinnedRepository[];
+    };
+  };
+}
+
 export interface ContributionStats {
   totalContributions: number;
   currentStreak: number;
@@ -93,4 +104,64 @@ export interface ContributionStats {
   averagePerDay: number;
   mostActiveDay: string;
   contributions: ContributionDay[];
+}
+
+// GitHub Pinned Repositories Types
+export interface PinnedRepository {
+  id: string;
+  name: string;
+  description: string | null;
+  url: string;
+  homepageUrl: string | null;
+  stargazerCount: number;
+  forkCount: number;
+  primaryLanguage: {
+    name: string;
+    color: string;
+  } | null;
+  repositoryTopics: {
+    nodes: Array<{
+      topic: {
+        name: string;
+      };
+    }>;
+  };
+  createdAt: string;
+  updatedAt: string;
+  pushedAt: string;
+  isPrivate: boolean;
+  isFork: boolean;
+  isArchived: boolean;
+  licenseInfo: {
+    name: string;
+  } | null;
+}
+
+export interface GitHubPinnedResponse {
+  user: {
+    pinnedItems: {
+      nodes: PinnedRepository[];
+    };
+  };
+}
+
+// Teknofest Project Types
+export interface TeknofestProject {
+  id: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  year: number;
+  category: string;
+  award: string | null;
+  teamName: string;
+  teamMembers: string[];
+  myRole: string;
+  technologies: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  videoUrl?: string;
+  imageUrl?: string;
+  status: 'completed' | 'finalist' | 'participant';
+  achievements: string[];
 }
