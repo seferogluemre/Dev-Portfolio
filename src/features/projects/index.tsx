@@ -6,7 +6,7 @@ import { useLanguage } from "@/hooks";
 import { PinnedSection } from "./components/PinnedSection";
 import { AllProjectsSection } from "./components/AllProjectsSection";
 import { ContributionGraph } from "./components/ContributionGraph";
-import { TeknofestSection } from "./components/TeknofestSection";
+
 import { usePinnedProjects } from "./hooks/usePinnedProjects";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, AlertCircle } from "lucide-react";
@@ -16,7 +16,6 @@ export default function ProjectsPage() {
   const { 
     pinnedProjects, 
     otherProjects, 
-    teknofestProjects,
     loading, 
     error, 
     refetch,

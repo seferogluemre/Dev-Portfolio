@@ -1,14 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { githubService } from '../services/github';
 import { ProjectData } from '../types';
-import { TeknofestProject } from '../types/github';
-import { teknofestProjects } from '../data';
+
 
 export interface UsePinnedProjectsReturn {
   pinnedProjects: ProjectData[];
   otherProjects: ProjectData[];
   allProjects: ProjectData[];
-  teknofestProjects: TeknofestProject[];
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
@@ -70,7 +68,6 @@ export const usePinnedProjects = (): UsePinnedProjectsReturn => {
     pinnedProjects,
     otherProjects,
     allProjects,
-    teknofestProjects,
     loading,
     error,
     refetch: fetchProjects,

@@ -24,11 +24,13 @@ interface Translations {
   noResults: string;
   allPosts: string;
   
-  // About Page
-  aboutTitle: string;
-  aboutDescription: string;
-  aboutCurrentWork: string;
-  aboutFreeTime: string;
+      // About Page
+    aboutTitle: string;
+    aboutDescription: string;
+    aboutCurrentWork: string;
+    aboutFreeTime: string;
+    aboutSkills: string;
+    aboutExperience: string;
   backToBlog: string;
   
   // Footer
@@ -59,8 +61,10 @@ const translations: Record<Language, Translations> = {
     // About Page
     aboutTitle: 'Hakkımda',
     aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack yazılım geliştiricisidir. 2022\'den beri yazılım geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
-    aboutCurrentWork: 'Şu anda kişisel projeler üzerinde çalışıyor ve mobil uygulama geliştirme konusunda kendini geliştiriyor.',
+    aboutCurrentWork: 'Şu anda OnlyJS Technology\'de çalışıyor ve 1 yılı aşkın süredir JavaScript ekosistemine odaklanarak projeler geliştiriyor.',
     aboutFreeTime: 'Boş zamanlarında yeni teknolojileri öğreniyor, blog yazıları yazıyor ve açık kaynak projelere katkıda bulunuyor.',
+    aboutSkills: 'Yazılıma farklı bakış açıları kazanmış, uçtan uca yazılım dünyasını algılayabilen ve yazılım proje yönetim tekniklerini uygulayabilen bir geliştirici.',
+    aboutExperience: 'Python ile programlama ve nesne tabanlı programlama konularında temel bilgiye sahip. Farklı veritabanı servisleri (MySQL, SQLite, MongoDB) ile çalışma deneyimi var. PyQt5 ile masaüstü uygulamaları ve Django ile web uygulamaları geliştirmiş. Android geliştirme konusunda Java ile deneyim sahibi. C# ile temel programlama, .NET, Entity Framework ve ADO.NET üzerine çalışmalar yapmış.',
     backToBlog: 'Blog\'a Dön',
     
     // Footer
@@ -89,8 +93,10 @@ const translations: Record<Language, Translations> = {
     // About Page
     aboutTitle: 'About',
     aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack software developer. He has been actively working in software development since 2022 and developing projects with modern technologies.',
-    aboutCurrentWork: 'Currently working on personal projects and improving himself in mobile application development.',
+    aboutCurrentWork: 'Currently working at OnlyJS Technology and has been developing projects focused on JavaScript ecosystem for over a year.',
     aboutFreeTime: 'In his free time, he learns new technologies, writes blog posts and contributes to open source projects.',
+    aboutSkills: 'A developer who has gained different perspectives on software, can perceive the end-to-end software world, and can apply software project management techniques.',
+    aboutExperience: 'Has foundational knowledge in Python programming and object-oriented programming. Has experience working with different database services (MySQL, SQLite, MongoDB). Developed desktop applications with PyQt5 and web applications with Django. Has experience in Android development with Java. Has worked on C# basic programming, .NET, Entity Framework and ADO.NET.',
     backToBlog: 'Back to Blog',
     
     // Footer
