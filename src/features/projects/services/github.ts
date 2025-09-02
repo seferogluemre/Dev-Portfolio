@@ -1,5 +1,6 @@
 import { GitHubRepository, GitHubApiError } from '../types/github';
 import { ProjectData } from '../types';
+import { PINNED_REPO_IDS, PINNED_REPO_ORDER, PINNED_REPO_DESCRIPTIONS, PINNED_REPO_TAGS } from '../config/pinnedRepos';
 
 const GITHUB_API_BASE = "https://api.github.com";
 const USERNAME = 'seferogluemre';
@@ -61,7 +62,22 @@ export class GitHubService {
     return this.fetchWithCache<Record<string, number>>(url);
   }
 
-  mapRepositoryToProject(repo: GitHubRepository): ProjectData {
+  // Repository'nin pinned olup olmadığını kontrol et
+  private isPinnedRepository(repo: GitHubRepository): boolean {
+    return PINNED_REPO_IDS.includes(repo.id);
+  }
+
+  // Pinned repository için özel açıklama al
+  private getPinnedDescription(repo: GitHubRepository): string {
+    return (PINNED_REPO_DESCRIPTIONS as any)[repo.name] || repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`;
+  }
+
+  // Pinned repository için özel etiketler al
+  private getPinnedTags(repo: GitHubRepository): string[] {
+    return (PINNED_REPO_TAGS as any)[repo.name] || [];
+  }
+
+  mapRepositoryToProject(repo: GitHubRepository, isPinned: boolean = false): ProjectData {
     const technologies: string[] = [];
     
     if (repo.language) {
@@ -91,12 +107,24 @@ export class GitHubService {
       }
     }
 
-    const featured = repo.stargazers_count >= 5;
+    // Featured belirleme (pinned veya yıldız sayısına göre)
+    const featured = isPinned || repo.stargazers_count >= 5;
+
+    // Açıklama belirleme (pinned ise özel açıklama)
+    const description = isPinned 
+      ? this.getPinnedDescription(repo)
+      : (repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`);
+
+    // Teknolojilere pinned etiketlerini ekle
+    if (isPinned) {
+      const pinnedTags = this.getPinnedTags(repo);
+      technologies.push(...pinnedTags);
+    }
 
     return {
       id: repo.id.toString(),
       title: this.formatRepoName(repo.name),
-              description: repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`,
+      description,
       technologies: [...new Set(technologies)], 
       githubUrl: repo.html_url,
       liveUrl: repo.homepage || undefined,
@@ -135,7 +163,7 @@ export class GitHubService {
         new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
       );
 
-      return filteredRepos.map(repo => this.mapRepositoryToProject(repo));
+      return filteredRepos.map(repo => this.mapRepositoryToProject(repo, this.isPinnedRepository(repo)));
 
     } catch (error) {
       console.error('GitHub projeleri alınırken hata:', error);
@@ -143,6 +171,39 @@ export class GitHubService {
     }
   }
 
+  // Pinned ve diğer projeleri ayır
+  async getPinnedAndOtherProjects(): Promise<{ pinned: ProjectData[]; others: ProjectData[] }> {
+    const allProjects = await this.getAllProjects();
+    
+    // Pinned projeleri filtrele ve sırala
+    const pinned = allProjects
+      .filter(project => PINNED_REPO_IDS.includes(Number(project.id)))
+      .sort((a, b) => {
+        const aIndex = PINNED_REPO_ORDER.indexOf(a.title.replace(/\s+/g, '-'));
+        const bIndex = PINNED_REPO_ORDER.indexOf(b.title.replace(/\s+/g, '-'));
+        return aIndex - bIndex;
+      });
+    
+    // Diğer projeler (pinned olmayanlar)
+    const others = allProjects
+      .filter(project => !PINNED_REPO_IDS.includes(Number(project.id)));
+
+    return { pinned, others };
+  }
+
+  // Sadece pinned projeleri getir
+  async getPinnedProjects(): Promise<ProjectData[]> {
+    const { pinned } = await this.getPinnedAndOtherProjects();
+    return pinned;
+  }
+
+  // Sadece pinned olmayan projeleri getir  
+  async getNonPinnedProjects(): Promise<ProjectData[]> {
+    const { others } = await this.getPinnedAndOtherProjects();
+    return others;
+  }
+
+  // Önce featured projeleri, sonra diğerlerini getir (eski method - geriye uyumluluk)
   async getFeaturedAndOtherProjects(): Promise<{ featured: ProjectData[]; others: ProjectData[] }> {
     const allProjects = await this.getAllProjects();
     
