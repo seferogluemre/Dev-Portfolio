@@ -77,26 +77,8 @@ export default function AboutSection({ data }: AboutSectionProps) {
               <p>{t.aboutFreeTime}</p>
             </div>
 
-            {/* Skills & Approach */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-3">
-                <Target className="h-5 w-5 text-primary" />
-                <h3 className="text-xl font-semibold">Yaklaşım & Beceriler</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                {t.aboutSkills}
-              </p>
-            </div>
-
             {/* Technical Experience */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <h3 className="text-xl font-semibold">Teknik Deneyim</h3>
-              </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {t.aboutExperience}
-              </p>
               {/* Current Focus */}
               <Card className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 mt-6">
                 <div className="flex items-start gap-3">
