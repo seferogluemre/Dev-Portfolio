@@ -7,6 +7,7 @@ export interface BlogPost {
   readTime: string;
   tags: string[];
   image?: string | null;
+  externalUrl?: string;
 }
 
 export interface BlogPageProps {

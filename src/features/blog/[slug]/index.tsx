@@ -33,5 +33,28 @@ function BlogDetailPageInner({ params }: BlogDetailPageProps) {
     notFound();
   }
 
+  // If post has external URL, redirect to it
+  if (post.externalUrl) {
+    React.useEffect(() => {
+      window.location.href = post.externalUrl!;
+    }, [post.externalUrl]);
+    
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="text-center">
+          <p className="text-lg mb-4">Medium'a yönlendiriliyorsunuz...</p>
+          <a 
+            href={post.externalUrl} 
+            className="text-primary hover:underline"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Direkt olarak açmak için tıklayın
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return <BlogDetail post={post} />;
 }

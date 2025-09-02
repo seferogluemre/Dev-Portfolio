@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useLanguage } from "@/hooks";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar, Clock, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BlogPost } from "../types";
@@ -81,12 +81,21 @@ export default function BlogCard({ post }: BlogCardProps) {
 
         {/* Read More Button */}
         <div className="mt-3">
-          <Button variant="ghost" className="group/btn p-0 h-auto font-medium text-sm" asChild>
-            <Link href={`/blog/${post.slug}`}>
-              {t.readMore}
-              <ArrowRight className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
+          {post.externalUrl ? (
+            <Button variant="ghost" className="group/btn p-0 h-auto font-medium text-sm" asChild>
+              <a href={post.externalUrl} target="_blank" rel="noopener noreferrer">
+                Medium'da Oku
+                <ExternalLink className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
+              </a>
+            </Button>
+          ) : (
+            <Button variant="ghost" className="group/btn p-0 h-auto font-medium text-sm" asChild>
+              <Link href={`/blog/${post.slug}`}>
+                {t.readMore}
+                <ArrowRight className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </Card>
