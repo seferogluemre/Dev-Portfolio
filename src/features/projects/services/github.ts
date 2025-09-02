@@ -6,7 +6,6 @@ const GITHUB_API_BASE = "https://api.github.com";
 const GITHUB_GRAPHQL_API = "https://api.github.com/graphql";
 const USERNAME = 'seferogluemre';
 
-// GitHub GraphQL sorgusu - contribution verileri için
 const CONTRIBUTIONS_QUERY = `
   query($username: String!) {
     user(login: $username) {
@@ -83,17 +82,14 @@ export class GitHubService {
     return this.fetchWithCache<Record<string, number>>(url);
   }
 
-  // Repository'nin pinned olup olmadığını kontrol et
   private isPinnedRepository(repo: GitHubRepository): boolean {
     return PINNED_REPO_IDS.includes(repo.id);
   }
 
-  // Pinned repository için özel açıklama al
   private getPinnedDescription(repo: GitHubRepository): string {
     return (PINNED_REPO_DESCRIPTIONS as any)[repo.name] || repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`;
   }
 
-  // Pinned repository için özel etiketler al
   private getPinnedTags(repo: GitHubRepository): string[] {
     return (PINNED_REPO_TAGS as any)[repo.name] || [];
   }
@@ -128,15 +124,12 @@ export class GitHubService {
       }
     }
 
-    // Featured belirleme (pinned veya yıldız sayısına göre)
     const featured = isPinned || repo.stargazers_count >= 5;
 
-    // Açıklama belirleme (pinned ise özel açıklama)
     const description = isPinned 
       ? this.getPinnedDescription(repo)
       : (repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`);
 
-    // Teknolojilere pinned etiketlerini ekle
     if (isPinned) {
       const pinnedTags = this.getPinnedTags(repo);
       technologies.push(...pinnedTags);
@@ -179,7 +172,6 @@ export class GitHubService {
         !repo.archived
       );
 
-      // Son commit tarihine göre sırala (pushed_at)
       filteredRepos.sort((a, b) => 
         new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
       );
@@ -195,7 +187,6 @@ export class GitHubService {
   async getPinnedAndOtherProjects(): Promise<{ pinned: ProjectData[]; others: ProjectData[] }> {
     const allProjects = await this.getAllProjects();
     
-    // Pinned projeleri filtrele ve sırala
     const pinned = allProjects
       .filter(project => PINNED_REPO_IDS.includes(Number(project.id)))
       .sort((a, b) => {
@@ -204,26 +195,22 @@ export class GitHubService {
         return aIndex - bIndex;
       });
     
-    // Diğer projeler (pinned olmayanlar)
     const others = allProjects
       .filter(project => !PINNED_REPO_IDS.includes(Number(project.id)));
 
     return { pinned, others };
   }
 
-  // Sadece pinned projeleri getir
   async getPinnedProjects(): Promise<ProjectData[]> {
     const { pinned } = await this.getPinnedAndOtherProjects();
     return pinned;
   }
 
-  // Sadece pinned olmayan projeleri getir  
   async getNonPinnedProjects(): Promise<ProjectData[]> {
     const { others } = await this.getPinnedAndOtherProjects();
     return others;
   }
 
-  // Önce featured projeleri, sonra diğerlerini getir (eski method - geriye uyumluluk)
   async getFeaturedAndOtherProjects(): Promise<{ featured: ProjectData[]; others: ProjectData[] }> {
     const allProjects = await this.getAllProjects();
     
@@ -233,10 +220,8 @@ export class GitHubService {
     return { featured, others };
   }
 
-  // GitHub Contributions API - Gerçek veriler için token kullan
   async getContributions(): Promise<ContributionStats> {
     try {
-      // Environment'dan GitHub token'ı al
       const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
       
       if (token && token.trim() !== '') {
@@ -253,7 +238,6 @@ export class GitHubService {
     }
   }
 
-  // GitHub GraphQL API ile contributions (Personal Access Token gerekli)
   async getContributionsWithToken(token: string): Promise<ContributionStats> {
     try {
       const response = await fetch(GITHUB_GRAPHQL_API, {
@@ -280,19 +264,16 @@ export class GitHubService {
     }
   }
 
-  // Contribution verilerini işle ve istatistikleri hesapla
   private processContributionData(data: GitHubContributions): ContributionStats {
     const calendar = data.user.contributionsCollection.contributionCalendar;
     const contributions: ContributionDay[] = [];
 
-    // Tüm günleri düzleştir
     calendar.weeks.forEach(week => {
       week.contributionDays.forEach(day => {
         contributions.push(day);
       });
     });
 
-    // İstatistikleri hesapla
     const totalContributions = calendar.totalContributions;
     const currentStreak = this.calculateCurrentStreak(contributions);
     const longestStreak = this.calculateLongestStreak(contributions);
@@ -309,7 +290,6 @@ export class GitHubService {
     };
   }
 
-  // Mevcut streak hesapla
   private calculateCurrentStreak(contributions: ContributionDay[]): number {
     const sortedContributions = contributions.sort((a, b) => 
       new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -326,7 +306,6 @@ export class GitHubService {
     return streak;
   }
 
-  // En uzun streak hesapla
   private calculateLongestStreak(contributions: ContributionDay[]): number {
     let maxStreak = 0;
     let currentStreak = 0;
@@ -346,7 +325,6 @@ export class GitHubService {
     return maxStreak;
   }
 
-  // En aktif günü bul
   private findMostActiveDay(contributions: ContributionDay[]): string {
     const dayContributions: { [key: string]: number } = {
       'Pazartesi': 0, 'Salı': 0, 'Çarşamba': 0, 'Perşembe': 0,
@@ -365,9 +343,7 @@ export class GitHubService {
       .sort(([,a], [,b]) => b - a)[0][0];
   }
 
-  // "TAŞAK" yazısı için pixel art pattern (7x5 grid her harf için)
   private getTextPattern(): number[][] {
-    // T-A-Ş-A-K harfleri için 7 satır, her harf 5 kolon + 1 boşluk = 29 kolon
     return [
       [1,1,1, 0, 1,1,1, 0, 1,1,1, 0, 1,1,1, 0, 1,0,1], // Satır 1
       [0,1,0, 0, 1,0,1, 0, 1,0,0, 0, 1,0,1, 0, 1,1,0], // Satır 2  
@@ -376,45 +352,39 @@ export class GitHubService {
       [0,1,0, 0, 1,0,1, 0, 1,1,1, 0, 1,0,1, 0, 1,0,1], // Satır 5
       [0,1,0, 0, 1,0,1, 0, 0,1,0, 0, 1,0,1, 0, 1,0,1], // Satır 6
       [0,1,0, 0, 1,0,1, 0, 1,1,1, 0, 1,0,1, 0, 1,0,1], // Satır 7
-    ];
+    ];  
   }
 
-  // Mock contribution data (demo için) - "TAŞAK" yazısıyla
   private getMockContributions(): ContributionStats {
     const contributions: ContributionDay[] = [];
     const today = new Date();
     const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
     const textPattern = this.getTextPattern();
     
-    // Son 365 gün için mock data oluştur
     for (let i = 364; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
       
       let contributionCount = 0;
       
-      // Contribution graph'ın ortasına yazıyı yerleştir (yaklaşık 26. haftadan itibaren)
       const daysSinceStart = 364 - i;
       const weekIndex = Math.floor(daysSinceStart / 7);
       const dayIndex = daysSinceStart % 7;
       
-      // Yazı pattern'ini uygula (26-45 hafta arası, ortalarda)
       if (weekIndex >= 20 && weekIndex < 39 && dayIndex < 7) {
         const patternCol = weekIndex - 20;
         const patternRow = dayIndex;
         
         if (patternCol < textPattern[0].length && patternRow < textPattern.length) {
           if (textPattern[patternRow][patternCol] === 1) {
-            contributionCount = 8; // Yüksek contribution (koyu yeşil)
+            contributionCount = 8;
           } else {
-            contributionCount = 0; // Boş (gri)
+                contributionCount = 0;
           }
         } else {
-          // Pattern dışında rastgele değerler
           contributionCount = Math.random() > 0.7 ? Math.floor(Math.random() * 4) : 0;
         }
-      } else {
-        // Pattern dışında rastgele değerler
+      } else {    
         contributionCount = Math.random() > 0.6 ? Math.floor(Math.random() * 6) : 0;
       }
       
