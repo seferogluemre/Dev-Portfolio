@@ -103,13 +103,7 @@ export default function ProjectsPage() {
             />
           )}
 
-          {/* Teknofest Projects Section */}
-          {!loading && !error && teknofestProjects.length > 0 && (
-            <div className="mb-8 md:mb-12">
-              <TeknofestSection projects={teknofestProjects} />
-            </div>
-          )}
-
+       
           {/* All Projects Section */}
           {!loading && !error && (
             <AllProjectsSection
