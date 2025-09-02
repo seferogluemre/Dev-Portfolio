@@ -1,15 +1,3 @@
 {
-  "posts": [
-    {
-      "slug": "python-temelden-ileri-seviyeye-yolculuk",
-      "title": "Python: Temelden İleri Seviyeye Adım Adım Yolculuk",
-      "description": "Python programlama dilini sıfırdan öğrenmeye başlayanlara yönelik kapsamlı bir rehber. Temel syntax'tan ileri seviye konulara kadar tüm aşamaları pratik örneklerle ele aldığım Medium makalem.",
-      "content": "Python öğrenme yolculuğunuzda size rehberlik edecek kapsamlı bir makale hazırladım. Bu yazıda Python'un temel kavramlarından başlayarak, veri tipleri, kontrol yapıları, fonksiyonlar, sınıflar ve ileri seviye konulara kadar geniş bir yelpazede bilgi paylaşıyorum.\n\nPython'u neden seçmelisiniz? Basit syntax yapısı, geniş kütüphane desteği ve çok yönlü kullanım alanları Python'u hem yeni başlayanlar hem de deneyimli geliştiriciler için ideal bir dil haline getiriyor.\n\nMakalede ele aldığım konular:\n• Python'un temel özellikleri ve kurulumu\n• Değişkenler, veri tipleri ve operatörler\n• Kontrol yapıları (if-else, döngüler)\n• Fonksiyonlar ve modüller\n• Nesne yönelimli programlama\n• Dosya işlemleri ve hata yönetimi\n• Popüler kütüphaneler ve frameworks\n\nHer konu için pratik örnekler ve kod parçacıkları paylaştım. Ayrıca Python'da proje geliştirme sürecini ve best practice'leri de detaylı olarak açıkladım.",
-      "date": "20 Aralık 2024",
-      "readTime": "12 dk okuma",
-      "tags": ["Python", "Programming", "Beginner", "Tutorial", "Medium"],
-      "image": "/blog/python-guide.jpg",
-      "externalUrl": "https://medium.com/@seferogluemre/python-temelden-i%CC%87leri-seviyeye-ad%C4%B1m-ad%C4%B1m-yolculuk-temel-rehber-f6e81f38a280"
-    }
-  ]
+  "posts": []
 }
