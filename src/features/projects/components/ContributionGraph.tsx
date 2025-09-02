@@ -60,17 +60,74 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
     );
   }
 
-  // Contribution graph'ı haftalara böl
-  const weeks = [];
+  // Contribution graph'ı haftalara böl - GitHub tarzı düzenleme
+  const weeks: (ContributionDay | null)[][] = [];
   const contributions = contributionStats.contributions;
   
-  for (let i = 0; i < contributions.length; i += 7) {
-    weeks.push(contributions.slice(i, i + 7));
+  // İlk haftayı tamamla (gerekirse boş günlerle başla)
+  const firstDate = new Date(contributions[0]?.date);
+  const startDayOfWeek = firstDate.getDay(); // 0 = Pazar, 1 = Pazartesi, ...
+  
+  // İlk haftayı oluştur
+  const firstWeek: (ContributionDay | null)[] = [];
+  
+  // İlk günden önceki boş günleri ekle
+  for (let i = 0; i < startDayOfWeek; i++) {
+    firstWeek.push(null);
+  }
+  
+  // Günleri haftalara böl
+  let currentWeek: (ContributionDay | null)[] = [...firstWeek];
+  
+  contributions.forEach((day) => {
+    currentWeek.push(day);
+    
+    if (currentWeek.length === 7) {
+      weeks.push([...currentWeek]);
+      currentWeek = [];
+    }
+  });
+  
+  // Son haftayı tamamla
+  if (currentWeek.length > 0) {
+    while (currentWeek.length < 7) {
+      currentWeek.push(null);
+    }
+    weeks.push(currentWeek);
   }
 
-  // Ay isimlerini al
+  // Ay isimlerini al ve month headers oluştur
   const monthNames = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
   const dayNames = ['P', 'P', 'S', 'Ç', 'P', 'C', 'C']; // Pazar, Pazartesi, Salı, ...
+  
+  // Ay başlıklarını hesapla
+  interface MonthHeader {
+    month: string;
+    weekIndex: number;
+    width: number;
+  }
+  
+  const monthHeaders: MonthHeader[] = [];
+  let currentMonth = -1;
+  
+  weeks.forEach((week, weekIndex) => {
+    const firstValidDay = week.find((day): day is ContributionDay => day !== null);
+    if (firstValidDay) {
+      const date = new Date(firstValidDay.date);
+      const month = date.getMonth();
+      
+      if (month !== currentMonth) {
+        monthHeaders.push({
+          month: monthNames[month],
+          weekIndex: weekIndex,
+          width: 1
+        });
+        currentMonth = month;
+      } else if (monthHeaders.length > 0) {
+        monthHeaders[monthHeaders.length - 1].width++;
+      }
+    }
+  });
 
   return (
     <Card className={`p-6 ${className}`}>
@@ -136,21 +193,32 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
         </div>
 
         {/* Contribution Graph */}
-        <div className="space-y-2">
-          {/* Ay başlıkları */}
-          <div className="flex text-xs text-muted-foreground mb-1">
-            <div className="w-6"></div>
-            {Array.from({ length: 12 }, (_, i) => (
-              <div key={i} className="flex-1 text-center">
-                {monthNames[i]}
+        <div className="space-y-3 bg-muted/20 p-4 rounded-lg border">
+          {/* Ay başlıkları - dinamik olarak hesaplanmış */}
+          <div className="flex text-xs text-muted-foreground font-medium">
+            <div className="w-8 flex-shrink-0"></div>
+            <div className="flex-1 overflow-x-auto">
+              <div className="flex relative min-w-max" style={{ width: `${weeks.length * 14}px`, height: '20px' }}>
+                {monthHeaders.map((header, index) => (
+                  <div
+                    key={index}
+                    className="absolute text-center font-medium"
+                    style={{
+                      left: `${header.weekIndex * 14}px`,
+                      width: `${Math.max(header.width * 14, 30)}px`,
+                    }}
+                  >
+                    {header.month}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
 
           {/* Gün başlıkları ve graph */}
           <div className="flex">
             {/* Gün başlıkları */}
-            <div className="flex flex-col space-y-1 w-6 text-xs text-muted-foreground">
+            <div className="flex flex-col gap-1 w-8 flex-shrink-0 text-xs text-muted-foreground font-medium">
               {dayNames.map((day, i) => (
                 <div key={i} className="h-3 flex items-center justify-center">
                   {i % 2 === 1 ? day : ''}
@@ -160,16 +228,20 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
 
             {/* Contribution squares */}
             <div className="flex-1 overflow-x-auto">
-              <div className="flex gap-1" style={{ width: 'max-content' }}>
+              <div className="flex gap-1 min-w-max pb-2">
                 {weeks.map((week, weekIndex) => (
                   <div key={weekIndex} className="flex flex-col gap-1">
                     {week.map((day, dayIndex) => (
-                      <ContributionSquare 
-                        key={`${weekIndex}-${dayIndex}`} 
-                        day={day} 
-                        weekIndex={weekIndex}
-                        dayIndex={dayIndex}
-                      />
+                      day ? (
+                        <ContributionSquare 
+                          key={`${weekIndex}-${dayIndex}`} 
+                          day={day} 
+                          weekIndex={weekIndex}
+                          dayIndex={dayIndex}
+                        />
+                      ) : (
+                        <div key={`${weekIndex}-${dayIndex}`} className="w-3 h-3 opacity-0" />
+                      )
                     ))}
                   </div>
                 ))}
@@ -188,10 +260,10 @@ export function ContributionGraph({ className }: ContributionGraphProps) {
             <div className="flex items-center space-x-1">
               <span>Az</span>
               <div className="flex space-x-1">
-                {['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'].map((color, i) => (
+                {['#f0f0f0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'].map((color, i) => (
                   <div
                     key={i}
-                    className="w-3 h-3 rounded-sm"
+                    className="w-3 h-3 rounded-sm border border-gray-200 dark:border-gray-600"
                     style={{ backgroundColor: color }}
                   />
                 ))}
@@ -244,8 +316,8 @@ function ContributionSquare({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`w-3 h-3 rounded-sm border cursor-pointer transition-all hover:border-foreground ${
-          isTextPixel ? 'border-green-400' : 'border-muted'
+        className={`w-3 h-3 rounded-sm border cursor-pointer transition-all hover:border-foreground hover:scale-110 ${
+          isTextPixel ? 'border-green-500 shadow-sm' : 'border-gray-200 dark:border-gray-600'
         }`}
         style={{ backgroundColor: day.color }}
       />
