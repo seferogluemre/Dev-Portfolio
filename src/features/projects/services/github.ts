@@ -171,7 +171,6 @@ export class GitHubService {
     }
   }
 
-  // Pinned ve diğer projeleri ayır
   async getPinnedAndOtherProjects(): Promise<{ pinned: ProjectData[]; others: ProjectData[] }> {
     const allProjects = await this.getAllProjects();
     
