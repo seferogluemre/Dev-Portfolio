@@ -13,7 +13,13 @@ import {
   Globe, 
   Wrench,
   BookOpen,
-  Target
+  Target,
+  Server,
+  Cloud,
+  Cpu,
+  Zap,
+  Container,
+  Layers
 } from "lucide-react";
 
 interface AboutSectionProps {
@@ -98,42 +104,88 @@ export default function AboutSection({ data }: AboutSectionProps) {
 
               {/* Technology Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Python & Backend */}
+                {/* Python & Scripting */}
                 <Card className="p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
                       <Code2 className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2">Python & Backend</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Python & Scripting</h4>
                       <div className="flex flex-wrap gap-2 mb-2">
                         <Badge variant="secondary" className="text-xs">Python</Badge>
+                        <Badge variant="secondary" className="text-xs">Scripts</Badge>
                         <Badge variant="secondary" className="text-xs">OOP</Badge>
                         <Badge variant="secondary" className="text-xs">Django</Badge>
                         <Badge variant="secondary" className="text-xs">PyQt5</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Nesne tabanlı programlama, web uygulamaları ve masaüstü uygulaması geliştirme
+                        Orta seviye Python ile script geliştirme, web ve masaüstü uygulamaları
                       </p>
                     </div>
                   </div>
                 </Card>
 
-                {/* Database */}
+                {/* Programming Languages */}
+                <Card className="p-4 hover:shadow-md transition-shadow">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-orange-100 text-orange-600">
+                      <Layers className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-foreground mb-2">Programlama Dilleri</h4>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <Badge variant="secondary" className="text-xs">JavaScript</Badge>
+                        <Badge variant="secondary" className="text-xs">TypeScript</Badge>
+                        <Badge variant="secondary" className="text-xs">C#</Badge>
+                        <Badge variant="secondary" className="text-xs">Java</Badge>
+                        <Badge variant="secondary" className="text-xs">C++</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Çoklu dil deneyimi ile farklı platformlarda geliştirme
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Database Systems */}
                 <Card className="p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-lg bg-green-100 text-green-600">
                       <Database className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2">Veritabanı</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Veritabanı Sistemleri</h4>
                       <div className="flex flex-wrap gap-2 mb-2">
+                        <Badge variant="secondary" className="text-xs">PostgreSQL</Badge>
                         <Badge variant="secondary" className="text-xs">MySQL</Badge>
+                        <Badge variant="secondary" className="text-xs">MSSQL</Badge>
                         <Badge variant="secondary" className="text-xs">SQLite</Badge>
                         <Badge variant="secondary" className="text-xs">MongoDB</Badge>
+                        <Badge variant="secondary" className="text-xs">Redis</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Farklı veritabanı servisleri ile çalışma deneyimi
+                        SQL ve NoSQL veritabanları ile kapsamlı çalışma deneyimi
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Cloud & DevOps */}
+                <Card className="p-4 hover:shadow-md transition-shadow">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-sky-100 text-sky-600">
+                      <Cloud className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-foreground mb-2">Cloud & DevOps</h4>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <Badge variant="secondary" className="text-xs">AWS</Badge>
+                        <Badge variant="secondary" className="text-xs">Docker</Badge>
+                        <Badge variant="secondary" className="text-xs">Container</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Cloud servisleri ve containerization deneyimi
                       </p>
                     </div>
                   </div>
@@ -158,50 +210,70 @@ export default function AboutSection({ data }: AboutSectionProps) {
                   </div>
                 </Card>
 
-                {/* .NET & C# */}
+                {/* Embedded Systems */}
                 <Card className="p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-indigo-100 text-indigo-600">
-                      <Wrench className="h-5 w-5" />
+                    <div className="p-2 rounded-lg bg-red-100 text-red-600">
+                      <Cpu className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2">.NET Ecosystem</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Embedded Systems</h4>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        <Badge variant="secondary" className="text-xs">C#</Badge>
-                        <Badge variant="secondary" className="text-xs">.NET</Badge>
-                        <Badge variant="secondary" className="text-xs">Entity Framework</Badge>
-                        <Badge variant="secondary" className="text-xs">ADO.NET</Badge>
+                        <Badge variant="secondary" className="text-xs">C++</Badge>
+                        <Badge variant="secondary" className="text-xs">Arduino</Badge>
+                        <Badge variant="secondary" className="text-xs">IoT</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Microsoft teknolojileri ile geliştirme deneyimi
+                        Gömülü sistemler ve IoT projeleri geliştirme
                       </p>
                     </div>
                   </div>
                 </Card>
               </div>
 
-              {/* Current Focus */}
-              <Card className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
+              {/* .NET Ecosystem */}
+              <Card className="p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-primary text-primary-foreground">
-                    <Globe className="h-5 w-5" />
+                  <div className="p-2 rounded-lg bg-indigo-100 text-indigo-600">
+                    <Wrench className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-foreground mb-2">Şu Anki Odak Noktam</h4>
+                    <h4 className="font-semibold text-foreground mb-2">.NET Ecosystem</h4>
                     <div className="flex flex-wrap gap-2 mb-2">
-                      <Badge className="text-xs">JavaScript</Badge>
-                      <Badge className="text-xs">TypeScript</Badge>
-                      <Badge className="text-xs">React</Badge>
-                      <Badge className="text-xs">Next.js</Badge>
-                      <Badge className="text-xs">Node.js</Badge>
+                      <Badge variant="secondary" className="text-xs">C#</Badge>
+                      <Badge variant="secondary" className="text-xs">.NET</Badge>
+                      <Badge variant="secondary" className="text-xs">Entity Framework</Badge>
+                      <Badge variant="secondary" className="text-xs">ADO.NET</Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      1+ yıldır JavaScript ekosisteminde fullstack projeler geliştiriyorum
+                      Microsoft teknolojileri ile geliştirme deneyimi
                     </p>
                   </div>
                 </div>
               </Card>
             </div>
+
+            {/* Current Focus */}
+            <Card className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 mt-6">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-primary text-primary-foreground">
+                  <Globe className="h-5 w-5" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground mb-2">Şu Anki Odak Noktam</h4>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <Badge className="text-xs">JavaScript</Badge>
+                    <Badge className="text-xs">TypeScript</Badge>
+                    <Badge className="text-xs">React</Badge>
+                    <Badge className="text-xs">Next.js</Badge>
+                    <Badge className="text-xs">Node.js</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    1+ yıldır JavaScript ekosisteminde fullstack projeler geliştiriyorum
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>

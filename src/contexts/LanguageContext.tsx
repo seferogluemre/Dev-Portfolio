@@ -64,7 +64,7 @@ const translations: Record<Language, Translations> = {
     aboutCurrentWork: 'Şu anda OnlyJS Technology\'de çalışıyor ve 1 yılı aşkın süredir JavaScript ekosistemine odaklanarak projeler geliştiriyor.',
     aboutFreeTime: 'Boş zamanlarında yeni teknolojileri öğreniyor, blog yazıları yazıyor ve açık kaynak projelere katkıda bulunuyor.',
     aboutSkills: 'Yazılıma farklı bakış açıları kazanmış, uçtan uca yazılım dünyasını algılayabilen ve yazılım proje yönetim tekniklerini uygulayabilen bir geliştirici.',
-    aboutExperience: 'Python ile programlama ve nesne tabanlı programlama konularında temel bilgiye sahip. Farklı veritabanı servisleri (MySQL, SQLite, MongoDB) ile çalışma deneyimi var. PyQt5 ile masaüstü uygulamaları ve Django ile web uygulamaları geliştirmiş. Android geliştirme konusunda Java ile deneyim sahibi. C# ile temel programlama, .NET, Entity Framework ve ADO.NET üzerine çalışmalar yapmış.',
+    aboutExperience: 'Orta seviye Python ile script ve yazılım geliştirme deneyimi. Çoklu veritabanı desteği (PostgreSQL, MySQL, MSSQL, SQLite, MongoDB, Redis) ile projeler geliştirmiş. JavaScript, TypeScript, C# ve Java dillerinde deneyim sahibi. PyQt5 ile masaüstü uygulamaları ve Django ile web uygulamaları geliştirmiş. Docker containerization ve AWS cloud servisleri ile çalışma deneyimi. C++ ve Arduino ile embedded sistemler geliştirmiş.',
     backToBlog: 'Blog\'a Dön',
     
     // Footer
@@ -96,7 +96,7 @@ const translations: Record<Language, Translations> = {
     aboutCurrentWork: 'Currently working at OnlyJS Technology and has been developing projects focused on JavaScript ecosystem for over a year.',
     aboutFreeTime: 'In his free time, he learns new technologies, writes blog posts and contributes to open source projects.',
     aboutSkills: 'A developer who has gained different perspectives on software, can perceive the end-to-end software world, and can apply software project management techniques.',
-    aboutExperience: 'Has foundational knowledge in Python programming and object-oriented programming. Has experience working with different database services (MySQL, SQLite, MongoDB). Developed desktop applications with PyQt5 and web applications with Django. Has experience in Android development with Java. Has worked on C# basic programming, .NET, Entity Framework and ADO.NET.',
+    aboutExperience: 'Has intermediate level Python experience in script and software development. Developed projects with multi-database support (PostgreSQL, MySQL, MSSQL, SQLite, MongoDB, Redis). Has experience in JavaScript, TypeScript, C# and Java languages. Developed desktop applications with PyQt5 and web applications with Django. Has experience with Docker containerization and AWS cloud services. Developed embedded systems with C++ and Arduino.',
     backToBlog: 'Back to Blog',
     
     // Footer
