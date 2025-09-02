@@ -46,7 +46,7 @@ const translations: Record<Language, Translations> = {
     
     // Hero Section
     heroGreeting: 'Merhaba',
-    heroName: 'Ben Yunus Emre SEFEROGLU,',
+    heroName: 'Ben  Emre SEFEROGLU,',
     heroPortfolio: 've burası benim portfolyom.',
     heroDescription: 'Burada, yazılarım aracılığıyla bir fullstack web developer olarak deneyimlerimi ve daha fazlasını paylaşıyorum. Şu sıralar mobil app development öğreniyorum ve bunları da yazıyor olacağım.',
     
@@ -60,11 +60,11 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'Hakkımda',
-    aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack yazılım geliştiricisidir. 2022\'den beri yazılım geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
+    aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack yazılım geliştiricisidir. 2021\'den beri yazılım geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
     aboutCurrentWork: 'Şu anda OnlyJS Technology\'de çalışıyor ve 1 yılı aşkın süredir JavaScript ekosistemine odaklanarak projeler geliştiriyor.',
     aboutFreeTime: 'Boş zamanlarında yeni teknolojileri öğreniyor, blog yazıları yazıyor ve açık kaynak projelere katkıda bulunuyor.',
     aboutSkills: 'Yazılıma farklı bakış açıları kazanmış, uçtan uca yazılım dünyasını algılayabilen ve yazılım proje yönetim tekniklerini uygulayabilen bir geliştirici.',
-    aboutExperience: 'Orta seviye Python ile script ve yazılım geliştirme deneyimi. Çoklu veritabanı desteği (PostgreSQL, MySQL, MSSQL, SQLite, MongoDB, Redis) ile projeler geliştirmiş. JavaScript, TypeScript, C# ve Java dillerinde deneyim sahibi. PyQt5 ile masaüstü uygulamaları ve Django ile web uygulamaları geliştirmiş. Docker containerization ve AWS cloud servisleri ile çalışma deneyimi. C++ ve Arduino ile embedded sistemler geliştirmiş.',
+    aboutExperience: 'Orta seviye Python ile script ve yazılım geliştirme deneyimi. Çoklu veritabanı desteği (PostgreSQL, MySQL, MSSQL, SQLite, Redis) ile projeler geliştirmiş. JavaScript, TypeScript, C# ve Java dillerinde deneyim sahibi. PyQt5 ile masaüstü uygulamaları ve Django ile web uygulamaları geliştirmiş. Docker containerization ve AWS cloud servisleri ile çalışma deneyimi. C++ ve Arduino ile embedded sistemler geliştirmiş.',
     backToBlog: 'Blog\'a Dön',
     
     // Footer
@@ -92,7 +92,7 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'About',
-    aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack software developer. He has been actively working in software development since 2022 and developing projects with modern technologies.',
+    aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack software developer. He has been actively working in software development since 2021 and developing projects with modern technologies.',
     aboutCurrentWork: 'Currently working at OnlyJS Technology and has been developing projects focused on JavaScript ecosystem for over a year.',
     aboutFreeTime: 'In his free time, he learns new technologies, writes blog posts and contributes to open source projects.',
     aboutSkills: 'A developer who has gained different perspectives on software, can perceive the end-to-end software world, and can apply software project management techniques.',

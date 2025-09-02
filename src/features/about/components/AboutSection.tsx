@@ -185,7 +185,6 @@ export default function AboutSection({ data }: AboutSectionProps) {
                         <Badge variant="secondary" className="text-xs">MySQL</Badge>
                         <Badge variant="secondary" className="text-xs">MSSQL</Badge>
                         <Badge variant="secondary" className="text-xs">SQLite</Badge>
-                        <Badge variant="secondary" className="text-xs">MongoDB</Badge>
                         <Badge variant="secondary" className="text-xs">Redis</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
