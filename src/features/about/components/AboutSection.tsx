@@ -11,8 +11,6 @@ import {
   Smartphone,
   Globe,
   Wrench,
-  BookOpen,
-  Target,
   Cloud,
   Cpu,
   Layers

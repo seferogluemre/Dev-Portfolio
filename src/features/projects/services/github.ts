@@ -134,7 +134,7 @@ export class GitHubService {
     const now = Date.now();
 
     if (cached && (now - cached.timestamp) < this.CACHE_DURATION) {
-      return cached.data;
+      return cached.data as T;
     }
 
     try {

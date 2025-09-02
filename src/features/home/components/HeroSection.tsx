@@ -2,13 +2,12 @@
 
 import { useLanguage } from "@/hooks";
 import { Hand } from "lucide-react";
-import { HeroData } from "../types";
 
-interface HeroSectionProps {
-  data: HeroData;
-}
+// interface HeroSectionProps {
+//   data: HeroData;
+// }
 
-export default function HeroSection({ data: _ }: HeroSectionProps) {
+export default function HeroSection() {
   const { t } = useLanguage();
   
   return (

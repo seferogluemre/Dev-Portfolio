@@ -3,39 +3,20 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { useLanguage } from "@/hooks";
-import { useState } from "react";
-import BlogCard from "./components/BlogCard";
-import SearchBar from "./components/SearchBar";
-import { blogPosts } from "./data";
-import { BlogPost } from "./types";
 
 export default function BlogPage() {
-  const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Arama fonksiyonu
-  const filteredPosts = blogPosts.filter((post) =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
-
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="flex-1">
-        <BlogPageInner searchQuery={searchQuery} setSearchQuery={setSearchQuery} filteredPosts={filteredPosts} />
+        <BlogPageInner />
       </main>
       <Footer />
     </div>
   );
 }
 
-function BlogPageInner({ searchQuery, setSearchQuery, filteredPosts }: {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  filteredPosts: BlogPost[];
-}) {
+function BlogPageInner() {
   const { t } = useLanguage();
 
   return (
@@ -150,5 +131,5 @@ function BlogPageInner({ searchQuery, setSearchQuery, filteredPosts }: {
 
 export { default as BlogDetail } from "./components/BlogDetail";
 export type { BlogPost } from "./types";
-export { BlogCard };
+export { default as BlogCard } from "./components/BlogCard";
 

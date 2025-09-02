@@ -29,20 +29,23 @@ function BlogDetailPageInner({ params }: BlogDetailPageProps) {
   const resolvedParams = React.use(params);
   const post = blogPosts.find(post => post.slug === resolvedParams.slug);
 
+  // Redirect effect - must be at the top level
+  React.useEffect(() => {
+    if (post?.externalUrl) {
+      window.location.href = post.externalUrl;
+    }
+  }, [post?.externalUrl]);
+
   if (!post) {
     notFound();
   }
 
-  // If post has external URL, redirect to it
+  // If post has external URL, show redirect message
   if (post.externalUrl) {
-    React.useEffect(() => {
-      window.location.href = post.externalUrl!;
-    }, [post.externalUrl]);
-    
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
         <div className="text-center">
-          <p className="text-lg mb-4">Medium'a yönlendiriliyorsunuz...</p>
+          <p className="text-lg mb-4">Medium&apos;a yönlendiriliyorsunuz...</p>
           <a 
             href={post.externalUrl} 
             className="text-primary hover:underline"

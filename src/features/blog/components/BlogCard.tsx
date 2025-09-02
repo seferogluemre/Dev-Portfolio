@@ -84,7 +84,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           {post.externalUrl ? (
             <Button variant="ghost" className="group/btn p-0 h-auto font-medium text-sm" asChild>
               <a href={post.externalUrl} target="_blank" rel="noopener noreferrer">
-                Medium'da Oku
+                Medium&apos;da Oku
                 <ExternalLink className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
               </a>
             </Button>
