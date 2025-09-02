@@ -61,3 +61,36 @@ export interface GitHubApiError {
   documentation_url?: string;
   status?: number;
 }
+
+// GitHub Contributions Types
+export interface ContributionDay {
+  date: string;
+  contributionCount: number;
+  color: string;
+}
+
+export interface ContributionWeek {
+  contributionDays: ContributionDay[];
+}
+
+export interface ContributionCalendar {
+  totalContributions: number;
+  weeks: ContributionWeek[];
+}
+
+export interface GitHubContributions {
+  user: {
+    contributionsCollection: {
+      contributionCalendar: ContributionCalendar;
+    };
+  };
+}
+
+export interface ContributionStats {
+  totalContributions: number;
+  currentStreak: number;
+  longestStreak: number;
+  averagePerDay: number;
+  mostActiveDay: string;
+  contributions: ContributionDay[];
+}

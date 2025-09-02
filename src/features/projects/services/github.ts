@@ -1,9 +1,30 @@
-import { GitHubRepository, GitHubApiError } from '../types/github';
+import { GitHubRepository, GitHubApiError, GitHubContributions, ContributionStats, ContributionDay } from '../types/github';
 import { ProjectData } from '../types';
 import { PINNED_REPO_IDS, PINNED_REPO_ORDER, PINNED_REPO_DESCRIPTIONS, PINNED_REPO_TAGS } from '../config/pinnedRepos';
 
 const GITHUB_API_BASE = "https://api.github.com";
+const GITHUB_GRAPHQL_API = "https://api.github.com/graphql";
 const USERNAME = 'seferogluemre';
+
+// GitHub GraphQL sorgusu - contribution verileri için
+const CONTRIBUTIONS_QUERY = `
+  query($username: String!) {
+    user(login: $username) {
+      contributionsCollection {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              date
+              contributionCount
+              color
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export class GitHubService {
   private static instance: GitHubService;
@@ -210,6 +231,210 @@ export class GitHubService {
     const others = allProjects.filter(project => !project.featured);
 
     return { featured, others };
+  }
+
+  // GitHub Contributions API - Gerçek veriler için token kullan
+  async getContributions(): Promise<ContributionStats> {
+    try {
+      // Environment'dan GitHub token'ı al
+      const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+      
+      if (token && token.trim() !== '') {
+        console.log('GitHub token bulundu, gerçek veriler çekiliyor...');
+        return await this.getContributionsWithToken(token);
+      } else {
+        console.log('GitHub token bulunamadı, mock data kullanılıyor...');
+        return this.getMockContributions();
+      }
+    } catch (error) {
+      console.error('GitHub contributions alınırken hata:', error);
+      console.log('Hata nedeniyle mock data\'ya geçiliyor...');
+      return this.getMockContributions();
+    }
+  }
+
+  // GitHub GraphQL API ile contributions (Personal Access Token gerekli)
+  async getContributionsWithToken(token: string): Promise<ContributionStats> {
+    try {
+      const response = await fetch(GITHUB_GRAPHQL_API, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: CONTRIBUTIONS_QUERY,
+          variables: { username: USERNAME }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`GitHub GraphQL API Error: ${response.status}`);
+      }
+
+      const data: { data: GitHubContributions } = await response.json();
+      return this.processContributionData(data.data);
+    } catch (error) {
+      console.error('GitHub GraphQL API error:', error);
+      throw error;
+    }
+  }
+
+  // Contribution verilerini işle ve istatistikleri hesapla
+  private processContributionData(data: GitHubContributions): ContributionStats {
+    const calendar = data.user.contributionsCollection.contributionCalendar;
+    const contributions: ContributionDay[] = [];
+
+    // Tüm günleri düzleştir
+    calendar.weeks.forEach(week => {
+      week.contributionDays.forEach(day => {
+        contributions.push(day);
+      });
+    });
+
+    // İstatistikleri hesapla
+    const totalContributions = calendar.totalContributions;
+    const currentStreak = this.calculateCurrentStreak(contributions);
+    const longestStreak = this.calculateLongestStreak(contributions);
+    const averagePerDay = totalContributions / 365;
+    const mostActiveDay = this.findMostActiveDay(contributions);
+
+    return {
+      totalContributions,
+      currentStreak,
+      longestStreak,
+      averagePerDay: Math.round(averagePerDay * 100) / 100,
+      mostActiveDay,
+      contributions
+    };
+  }
+
+  // Mevcut streak hesapla
+  private calculateCurrentStreak(contributions: ContributionDay[]): number {
+    const sortedContributions = contributions.sort((a, b) => 
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
+    let streak = 0;
+    for (const contribution of sortedContributions) {
+      if (contribution.contributionCount > 0) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+    return streak;
+  }
+
+  // En uzun streak hesapla
+  private calculateLongestStreak(contributions: ContributionDay[]): number {
+    let maxStreak = 0;
+    let currentStreak = 0;
+
+    const sortedContributions = contributions.sort((a, b) => 
+      new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+
+    for (const contribution of sortedContributions) {
+      if (contribution.contributionCount > 0) {
+        currentStreak++;
+        maxStreak = Math.max(maxStreak, currentStreak);
+      } else {
+        currentStreak = 0;
+      }
+    }
+    return maxStreak;
+  }
+
+  // En aktif günü bul
+  private findMostActiveDay(contributions: ContributionDay[]): string {
+    const dayContributions: { [key: string]: number } = {
+      'Pazartesi': 0, 'Salı': 0, 'Çarşamba': 0, 'Perşembe': 0,
+      'Cuma': 0, 'Cumartesi': 0, 'Pazar': 0
+    };
+
+    const dayNames = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+
+    contributions.forEach(contribution => {
+      const date = new Date(contribution.date);
+      const dayName = dayNames[date.getDay()];
+      dayContributions[dayName] += contribution.contributionCount;
+    });
+
+    return Object.entries(dayContributions)
+      .sort(([,a], [,b]) => b - a)[0][0];
+  }
+
+  // "TAŞAK" yazısı için pixel art pattern (7x5 grid her harf için)
+  private getTextPattern(): number[][] {
+    // T-A-Ş-A-K harfleri için 7 satır, her harf 5 kolon + 1 boşluk = 29 kolon
+    return [
+      [1,1,1, 0, 1,1,1, 0, 1,1,1, 0, 1,1,1, 0, 1,0,1], // Satır 1
+      [0,1,0, 0, 1,0,1, 0, 1,0,0, 0, 1,0,1, 0, 1,1,0], // Satır 2  
+      [0,1,0, 0, 1,1,1, 0, 1,1,0, 0, 1,1,1, 0, 1,0,1], // Satır 3
+      [0,1,0, 0, 1,0,1, 0, 0,0,1, 0, 1,0,1, 0, 1,0,1], // Satır 4
+      [0,1,0, 0, 1,0,1, 0, 1,1,1, 0, 1,0,1, 0, 1,0,1], // Satır 5
+      [0,1,0, 0, 1,0,1, 0, 0,1,0, 0, 1,0,1, 0, 1,0,1], // Satır 6
+      [0,1,0, 0, 1,0,1, 0, 1,1,1, 0, 1,0,1, 0, 1,0,1], // Satır 7
+    ];
+  }
+
+  // Mock contribution data (demo için) - "TAŞAK" yazısıyla
+  private getMockContributions(): ContributionStats {
+    const contributions: ContributionDay[] = [];
+    const today = new Date();
+    const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+    const textPattern = this.getTextPattern();
+    
+    // Son 365 gün için mock data oluştur
+    for (let i = 364; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      
+      let contributionCount = 0;
+      
+      // Contribution graph'ın ortasına yazıyı yerleştir (yaklaşık 26. haftadan itibaren)
+      const daysSinceStart = 364 - i;
+      const weekIndex = Math.floor(daysSinceStart / 7);
+      const dayIndex = daysSinceStart % 7;
+      
+      // Yazı pattern'ini uygula (26-45 hafta arası, ortalarda)
+      if (weekIndex >= 20 && weekIndex < 39 && dayIndex < 7) {
+        const patternCol = weekIndex - 20;
+        const patternRow = dayIndex;
+        
+        if (patternCol < textPattern[0].length && patternRow < textPattern.length) {
+          if (textPattern[patternRow][patternCol] === 1) {
+            contributionCount = 8; // Yüksek contribution (koyu yeşil)
+          } else {
+            contributionCount = 0; // Boş (gri)
+          }
+        } else {
+          // Pattern dışında rastgele değerler
+          contributionCount = Math.random() > 0.7 ? Math.floor(Math.random() * 4) : 0;
+        }
+      } else {
+        // Pattern dışında rastgele değerler
+        contributionCount = Math.random() > 0.6 ? Math.floor(Math.random() * 6) : 0;
+      }
+      
+      const colorIndex = contributionCount === 0 ? 0 : Math.min(Math.floor(contributionCount / 2) + 1, 4);
+      
+      contributions.push({
+        date: date.toISOString().split('T')[0],
+        contributionCount,
+        color: colors[colorIndex]
+      });
+    }
+
+    return {
+      totalContributions: contributions.reduce((sum, day) => sum + day.contributionCount, 0),
+      currentStreak: this.calculateCurrentStreak(contributions),
+      longestStreak: this.calculateLongestStreak(contributions),
+      averagePerDay: 2.8,
+      mostActiveDay: 'Çarşamba',
+      contributions
+    };
   }
 }
 
