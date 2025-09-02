@@ -1,3 +1,54 @@
 {
-  "projects": []
+  "projects": [
+    {
+      "id": "1",
+      "title": "E-Ticaret Web Uygulaması",
+      "description": "Modern ve kullanıcı dostu bir e-ticaret platformu. Ürün yönetimi, sepet işlemleri, ödeme entegrasyonu ve admin paneli içerir.",
+      "technologies": ["React", "Next.js", "TypeScript", "Tailwind", "Node.js", "MongoDB"],
+      "liveUrl": "https://example.com",
+      "githubUrl": "https://github.com/seferogluemre",
+      "status": "completed",
+      "date": "2024-03-15",
+      "featured": true,
+      "image": "/projects/ecommerce.jpg",
+      "longDescription": "Kapsamlı bir e-ticaret çözümü geliştirdim. Modern React teknolojileri kullanarak responsive tasarım, güvenli ödeme sistemi ve admin yönetim paneli oluşturdum."
+    },
+    {
+      "id": "2",
+      "title": "Task Management App",
+      "description": "Takım çalışması için geliştirilmiş proje yönetim uygulaması. Kanban board, real-time güncellemeler ve ekip iş birliği özellikleri.",
+      "technologies": ["Vue", "Express", "PostgreSQL", "Socket.io", "Docker"],
+      "liveUrl": "https://taskapp.example.com",
+      "githubUrl": "https://github.com/seferogluemre/task-app",
+      "status": "in-progress",
+      "date": "2024-02-20",
+      "featured": false,
+      "image": "/projects/taskapp.jpg",
+      "longDescription": "Takımlar için modern bir proje yönetim aracı. Real-time güncellemeler, drag-drop kanban board ve detaylı raporlama sistemi."
+    },
+    {
+      "id": "3",
+      "title": "Portfolio Website",
+      "description": "Kişisel portfolyo websitesi. Blog yazıları, proje vitrine ve iletişim formu içeren modern tasarım.",
+      "technologies": ["Next.js", "TypeScript", "Tailwind", "MDX"],
+      "liveUrl": "https://seferogluemre.com",
+      "githubUrl": "https://github.com/seferogluemre/portfolio",
+      "status": "completed",
+      "date": "2024-01-10",
+      "featured": true,
+      "image": "/projects/portfolio.jpg",
+      "longDescription": "Kişisel marka oluşturmak için geliştirdiğim modern portfolyo websitesi. Blog yazıları, projeler ve hakkımda bölümleri içerir."
+    },
+    {
+      "id": "4",
+      "title": "Weather App",
+      "description": "Hava durumu tahmin uygulaması. Konum bazlı hava durumu bilgileri, 7 günlük tahmin ve interaktif haritalar.",
+      "technologies": ["React", "JavaScript", "CSS", "Weather API"],
+      "githubUrl": "https://github.com/seferogluemre/weather-app",
+      "status": "completed",
+      "date": "2023-12-05",
+      "featured": false,
+      "longDescription": "OpenWeatherMap API kullanarak geliştirdiğim hava durumu uygulaması. Konum bazlı tahminler ve görsel hava durumu göstergeleri."
+    }
+  ]
 }

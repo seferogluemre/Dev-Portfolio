@@ -3,6 +3,9 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { useLanguage } from "@/hooks";
+import { projects } from "./data";
+import { Card } from "@/components/ui/card";
+import { ProjectCard } from "./components/project-card";
 
 export default function ProjectsPage() {
   const { t } = useLanguage();
@@ -22,17 +25,26 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          {/* Coming Soon */}
-          <div className="text-center py-16">
-            <div className="max-w-md mx-auto">
-              <h3 className="text-xl font-semibold mb-2">
-                Yakında...
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Projeler sayfası şu anda geliştiriliyor. Yakında tüm projelerimi burada görebileceksiniz.
-              </p>
+          {/* Projects Grid */}
+          {projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
             </div>
-          </div>
+          ) : (
+            /* Coming Soon */
+            <div className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <h3 className="text-xl font-semibold mb-2">
+                  Yakında...
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Projeler sayfası şu anda geliştiriliyor. Yakında tüm projelerimi burada görebileceksiniz.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

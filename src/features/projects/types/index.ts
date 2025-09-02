@@ -15,3 +15,6 @@ export interface ProjectData {
 export interface ProjectsPageProps {
   projects: ProjectData[];
 }
+export interface ProjectCardProps {
+  project: ProjectData;
+}
