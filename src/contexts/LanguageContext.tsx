@@ -58,7 +58,7 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'Hakkımda',
-    aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack web developer\'dır. 2020\'den beri web geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
+    aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack yazılım geliştiricisidir. 2022\'den beri yazılım geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
     aboutCurrentWork: 'Şu anda kişisel projeler üzerinde çalışıyor ve mobil uygulama geliştirme konusunda kendini geliştiriyor.',
     aboutFreeTime: 'Boş zamanlarında yeni teknolojileri öğreniyor, blog yazıları yazıyor ve açık kaynak projelere katkıda bulunuyor.',
     backToBlog: 'Blog\'a Dön',
@@ -88,7 +88,7 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'About',
-    aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack web developer. He has been actively working in web development since 2020 and developing projects with modern technologies.',
+    aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack software developer. He has been actively working in software development since 2022 and developing projects with modern technologies.',
     aboutCurrentWork: 'Currently working on personal projects and improving himself in mobile application development.',
     aboutFreeTime: 'In his free time, he learns new technologies, writes blog posts and contributes to open source projects.',
     backToBlog: 'Back to Blog',
