@@ -45,7 +45,6 @@ export const FRAMEWORKS_AND_TOOLS = [
 
 // Teknoloji kategorisini belirle
 export const getTechCategory = (tech: string): 'language' | 'tool' | 'other' => {
-  const techUpper = tech.charAt(0).toUpperCase() + tech.slice(1).toLowerCase();
   const techLower = tech.toLowerCase();
   
   // Programlama dilleri kontrolü

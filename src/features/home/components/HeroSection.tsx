@@ -8,7 +8,7 @@ interface HeroSectionProps {
   data: HeroData;
 }
 
-export default function HeroSection({ data }: HeroSectionProps) {
+export default function HeroSection({ data: _ }: HeroSectionProps) {
   const { t } = useLanguage();
   
   return (

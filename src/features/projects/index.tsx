@@ -35,7 +35,7 @@ export default function ProjectsPage() {
               {t.projects}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-              GitHub hesabımdan otomatik olarak çekilen projelerim. Pinned projeler ve tüm repository'lerim.
+              GitHub hesabımdan otomatik olarak çekilen projelerim. Pinned projeler ve tüm repository&apos;lerim.
             </p>
             
             {/* Refresh Button */}
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                   Projeler Yükleniyor...
                 </h3>
                 <p className="text-muted-foreground">
-                  GitHub API'den pinned ve tüm projeler çekiliyor. Lütfen bekleyiniz.
+                  GitHub API&apos;den pinned ve tüm projeler çekiliyor. Lütfen bekleyiniz.
                 </p>
               </div>
             </div>

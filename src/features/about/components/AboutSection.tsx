@@ -9,16 +9,12 @@ import {
   Code2,
   Database,
   Smartphone,
-  Monitor,
   Globe,
   Wrench,
   BookOpen,
   Target,
-  Server,
   Cloud,
   Cpu,
-  Zap,
-  Container,
   Layers
 } from "lucide-react";
 

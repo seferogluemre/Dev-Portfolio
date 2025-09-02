@@ -194,11 +194,11 @@ export function ProjectFilters({ projects, onFilter }: ProjectFiltersProps) {
       {hasActiveFilters && (
         <div className="text-center text-sm text-muted-foreground">
           {searchTerm && (
-            <span>"{searchTerm}" için arama</span>
+            <span>&quot;{searchTerm}&quot; için arama</span>
           )}
           {searchTerm && selectedTech && <span> • </span>}
           {selectedTech && (
-            <span>"{selectedTech}" teknolojisi</span>
+            <span>&quot;{selectedTech}&quot; teknolojisi</span>
           )}
         </div>
       )}

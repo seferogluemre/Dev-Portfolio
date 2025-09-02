@@ -1,4 +1,4 @@
-import { GitHubRepository, GitHubApiError, GitHubContributions, ContributionStats, ContributionDay, PinnedRepository, GitHubPinnedResponse, GitHubCombinedResponse } from '../types/github';
+import { GitHubRepository, GitHubContributions, ContributionStats, ContributionDay, PinnedRepository, GitHubPinnedResponse, GitHubCombinedResponse } from '../types/github';
 import { ProjectData } from '../types';
 import { PINNED_REPO_IDS, PINNED_REPO_ORDER, PINNED_REPO_DESCRIPTIONS, PINNED_REPO_TAGS } from '../config/pinnedRepos';
 
@@ -119,7 +119,7 @@ const COMBINED_QUERY = `
 
 export class GitHubService {
   private static instance: GitHubService;
-  private cache: Map<string, { data: any; timestamp: number }> = new Map();
+  private cache: Map<string, { data: unknown; timestamp: number }> = new Map();
   private readonly CACHE_DURATION = 5 * 60 * 1000; 
 
   static getInstance(): GitHubService {
@@ -179,11 +179,11 @@ export class GitHubService {
   }
 
   private getPinnedDescription(repo: GitHubRepository): string {
-    return (PINNED_REPO_DESCRIPTIONS as any)[repo.name] || repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`;
+    return (PINNED_REPO_DESCRIPTIONS as Record<string, string>)[repo.name] || repo.description || `${this.formatRepoName(repo.name)} projesi hakkında detaylı açıklama yakında eklenecek.`;
   }
 
   private getPinnedTags(repo: GitHubRepository): string[] {
-    return (PINNED_REPO_TAGS as any)[repo.name] || [];
+    return (PINNED_REPO_TAGS as Record<string, string[]>)[repo.name] || [];
   }
 
   mapRepositoryToProject(repo: GitHubRepository, isPinned: boolean = false): ProjectData {

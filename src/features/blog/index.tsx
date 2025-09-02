@@ -7,6 +7,7 @@ import { useState } from "react";
 import BlogCard from "./components/BlogCard";
 import SearchBar from "./components/SearchBar";
 import { blogPosts } from "./data";
+import { BlogPost } from "./types";
 
 export default function BlogPage() {
   const { t } = useLanguage();
@@ -33,7 +34,7 @@ export default function BlogPage() {
 function BlogPageInner({ searchQuery, setSearchQuery, filteredPosts }: {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  filteredPosts: any[];
+  filteredPosts: BlogPost[];
 }) {
   const { t } = useLanguage();
 
@@ -62,7 +63,7 @@ function BlogPageInner({ searchQuery, setSearchQuery, filteredPosts }: {
       {searchQuery && (
         <div className="mb-6 text-center">
           <p className="text-sm text-muted-foreground">
-            "{searchQuery}" için {filteredPosts.length} yazı bulundu
+            &quot;{searchQuery}&quot; için {filteredPosts.length} yazı bulundu
           </p>
         </div>
       )}
