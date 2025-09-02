@@ -5,12 +5,12 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { AboutData } from "../types";
-import { 
-  Code2, 
-  Database, 
-  Smartphone, 
-  Monitor, 
-  Globe, 
+import {
+  Code2,
+  Database,
+  Smartphone,
+  Monitor,
+  Globe,
   Wrench,
   BookOpen,
   Target,
@@ -101,9 +101,33 @@ export default function AboutSection({ data }: AboutSectionProps) {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 {t.aboutExperience}
               </p>
-
+              {/* Current Focus */}
+              <Card className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 mt-6">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary text-primary-foreground">
+                    <Globe className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-foreground mb-2">Şu Anki Odak Noktam</h4>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <Badge className="text-xs">JavaScript</Badge>
+                      <Badge className="text-xs">TypeScript</Badge>
+                      <Badge className="text-xs">React</Badge>
+                      <Badge className="text-xs">Next.js</Badge>
+                      <Badge className="text-xs">Node.js</Badge>
+                      <Badge className="text-xs">Elysia.js</Badge>
+                      <Badge className="text-xs">Nest.js</Badge>
+                      <Badge className="text-xs">Express.js</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      1+ yıldır JavaScript ekosisteminde fullstack projeler geliştiriyorum
+                    </p>
+                  </div>
+                </div>
+              </Card>
               {/* Technology Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
                 {/* Python & Scripting */}
                 <Card className="p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
@@ -253,27 +277,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
               </Card>
             </div>
 
-            {/* Current Focus */}
-            <Card className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 mt-6">
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-lg bg-primary text-primary-foreground">
-                  <Globe className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground mb-2">Şu Anki Odak Noktam</h4>
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <Badge className="text-xs">JavaScript</Badge>
-                    <Badge className="text-xs">TypeScript</Badge>
-                    <Badge className="text-xs">React</Badge>
-                    <Badge className="text-xs">Next.js</Badge>
-                    <Badge className="text-xs">Node.js</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    1+ yıldır JavaScript ekosisteminde fullstack projeler geliştiriyorum
-                  </p>
-                </div>
-              </div>
-            </Card>
+
           </div>
         </div>
       </div>
