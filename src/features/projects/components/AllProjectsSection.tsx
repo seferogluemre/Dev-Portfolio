@@ -94,7 +94,7 @@ export function AllProjectsSection({ otherProjects, showAllProjects }: AllProjec
               key={project.id}
               className="animate-in fade-in slide-in-from-bottom-4"
               style={{
-                animationDelay: '0ms', // Zaten setTimeout ile kontrol ediyoruz
+                animationDelay: '0ms', 
                 animationFillMode: 'both'
               }}
             >
