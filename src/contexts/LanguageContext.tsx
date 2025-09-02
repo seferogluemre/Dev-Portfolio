@@ -44,7 +44,7 @@ const translations: Record<Language, Translations> = {
     
     // Hero Section
     heroGreeting: 'Merhaba',
-    heroName: 'Ben Berat,',
+    heroName: 'Ben Yunus Emre SEFEROGLU,',
     heroPortfolio: 've burası benim portfolyom.',
     heroDescription: 'Burada, yazılarım aracılığıyla bir fullstack web developer olarak deneyimlerimi ve daha fazlasını paylaşıyorum. Şu sıralar mobil app development öğreniyorum ve bunları da yazıyor olacağım.',
     
@@ -58,13 +58,13 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'Hakkımda',
-    aboutDescription: 'Berat, kendi kendini yetiştirmiş bir fullstack web developer\'dır. 2020\'den beri web geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
+    aboutDescription: 'Emre SEFEROGLU, kendi kendini yetiştirmiş bir fullstack web developer\'dır. 2020\'den beri web geliştirme alanında aktif olarak çalışmakta ve modern teknolojilerle projeler geliştirmektedir.',
     aboutCurrentWork: 'Şu anda kişisel projeler üzerinde çalışıyor ve mobil uygulama geliştirme konusunda kendini geliştiriyor.',
     aboutFreeTime: 'Boş zamanlarında yeni teknolojileri öğreniyor, blog yazıları yazıyor ve açık kaynak projelere katkıda bulunuyor.',
     backToBlog: 'Blog\'a Dön',
     
     // Footer
-    copyright: 'Berat Güdelek • © {year} • beratgdlk.com'
+    copyright: 'Yunus Emre SEFEROGLU • © {year} • seferogluemre.com'
   },
   en: {
     // Navigation
@@ -74,7 +74,7 @@ const translations: Record<Language, Translations> = {
     
     // Hero Section
     heroGreeting: 'Hi',
-    heroName: "I'm Berat,",
+    heroName: "I'm Emre SEFEROGLU,",
     heroPortfolio: 'and this is my portfolio.',
     heroDescription: 'Here, I share through my writing my experience as a fullstack web developer and more. Currently learning mobile app development and will be writing about it.',
     
@@ -88,13 +88,13 @@ const translations: Record<Language, Translations> = {
     
     // About Page
     aboutTitle: 'About',
-    aboutDescription: 'Berat is a self-taught fullstack web developer. He has been actively working in web development since 2020 and developing projects with modern technologies.',
+    aboutDescription: 'Emre SEFEROGLU is a self-taught fullstack web developer. He has been actively working in web development since 2020 and developing projects with modern technologies.',
     aboutCurrentWork: 'Currently working on personal projects and improving himself in mobile application development.',
     aboutFreeTime: 'In his free time, he learns new technologies, writes blog posts and contributes to open source projects.',
     backToBlog: 'Back to Blog',
     
     // Footer
-    copyright: 'Berat Güdelek • © {year} • beratgdlk.com'
+    copyright: 'Yunus Emre SEFEROGLU • © {year} • seferogluemre.com'
   }
 };
 

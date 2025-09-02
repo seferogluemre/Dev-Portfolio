@@ -12,7 +12,7 @@ export default function Footer() {
         {/* Sosyal İkonlar */}
                  <div className="flex justify-center space-x-8 mb-4">
                     <a 
-            href="mailto:beratgdlk@gmail.com"
+            href="mailto:seferoglu.yazilim@outlook.com"
             className="text-muted-foreground hover:text-foreground transition-colors p-2"
             aria-label="Email"
           >
@@ -20,7 +20,7 @@ export default function Footer() {
           </a>
           
           <a 
-            href="https://github.com/beratgdlk"
+            href="https://github.com/seferogluemre"
             className="text-muted-foreground hover:text-foreground transition-colors p-2"
             aria-label="GitHub"
           >
@@ -28,7 +28,7 @@ export default function Footer() {
           </a>
           
           <a 
-            href="https://www.linkedin.com/in/beratgudelek/"
+            href="https://www.linkedin.com/in/seferogluemre/"
             className="text-muted-foreground hover:text-foreground transition-colors p-2"
             aria-label="LinkedIn"
           >
@@ -36,7 +36,7 @@ export default function Footer() {
           </a>
           
           <a 
-            href="https://medium.com/@beratgdlk"
+            href="https://medium.com/@seferogluemre"
             className="text-muted-foreground hover:text-foreground transition-colors p-2"
             aria-label="Medium"
           >

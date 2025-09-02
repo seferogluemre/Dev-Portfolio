@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Berat Güdelek - Fullstack Web Developer",
+  title: "Yunus Emre SEFEROĞLU - Fullstack Software Developer",
   description: "Fullstack web developer sharing experiences and learnings about backend, frontend, and mobile app development.",
   icons: {
     icon: '/logo-bg-black.ico',

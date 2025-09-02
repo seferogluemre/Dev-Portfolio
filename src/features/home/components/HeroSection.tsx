@@ -23,7 +23,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
                 animation: 'wave 2.5s cubic-bezier(0.4, 0.0, 0.6, 1) infinite',
                 transformOrigin: '75% 80%'
               }}
-            /> {t.heroName.replace('Berat', '')}<span className="text-primary">Berat</span>,
+            /> I'm <span className="text-primary">Yunus Emre</span>,
             <br />
             {t.heroPortfolio}
           </h1>

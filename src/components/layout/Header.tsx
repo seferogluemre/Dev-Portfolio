@@ -22,8 +22,6 @@ export default function Header() {
     return null;
   }
 
-
-
   return (
     <>
       <header className="w-full py-6 px-6">
@@ -37,7 +35,7 @@ export default function Header() {
               height={40}
               className="w-10 h-10"
             />
-            <span className="text-xl font-bold">beratgdlk</span>
+            <span className="text-xl font-bold">seferogluemre</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -157,7 +155,7 @@ export default function Header() {
             {/* Footer */}
             <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-border">
               <p className="text-xs text-muted-foreground text-center">
-                beratgdlk.com
+                seferogluemre.com
               </p>
             </div>
           </div>
