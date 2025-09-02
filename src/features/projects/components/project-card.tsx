@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProjectCardProps } from "../types";
-import { ExternalLink, Github, Calendar } from "lucide-react";
+import { ExternalLink, Github, Calendar, Star, GitFork, Eye } from "lucide-react";
 import Image from "next/image";
 
 // Technology icon mapping
@@ -94,6 +94,30 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           </div>
 
+          {/* GitHub Stats */}
+          {(project.starCount !== undefined || project.forkCount !== undefined) && (
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              {project.starCount !== undefined && (
+                <div className="flex items-center gap-1">
+                  <Star className="h-3 w-3" />
+                  <span>{project.starCount}</span>
+                </div>
+              )}
+              {project.forkCount !== undefined && (
+                <div className="flex items-center gap-1">
+                  <GitFork className="h-3 w-3" />
+                  <span>{project.forkCount}</span>
+                </div>
+              )}
+              {project.language && (
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  <span>{project.language}</span>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Status and Date */}
           <div className="flex items-center justify-between text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
@@ -101,11 +125,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <span>{new Date(project.date).toLocaleDateString('tr-TR')}</span>
             </div>
             <Badge
-              variant={project.status === 'completed' ? 'default' : project.status === 'in-progress' ? 'secondary' : 'outline'}
+              variant={project.status === 'completed' ? 'default' : 
+                       project.status === 'in-progress' ? 'secondary' : 
+                       project.status === 'archived' ? 'outline' : 'outline'}
               className="text-xs"
             >
               {project.status === 'completed' ? '✅ Tamamlandı' :
-                project.status === 'in-progress' ? '🚧 Devam Ediyor' : '📋 Planlandı'}
+               project.status === 'in-progress' ? '🚧 Devam Ediyor' : 
+               project.status === 'archived' ? '📦 Arşivlendi' : '📋 Planlandı'}
             </Badge>
           </div>
         </div>
