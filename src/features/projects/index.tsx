@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import { useLanguage } from "@/hooks";
 import { PinnedSection } from "./components/PinnedSection";
 import { AllProjectsSection } from "./components/AllProjectsSection";
-import { ContributionGraph } from "./components/ContributionGraph";
 
 import { usePinnedProjects } from "./hooks/usePinnedProjects";
 import { Button } from "@/components/ui/button";
@@ -85,12 +84,6 @@ export default function ProjectsPage() {
             </div>
           )}
 
-          {/* GitHub Contribution Graph */}
-          {!loading && !error && (
-            <div className="mb-8 md:mb-12">
-              <ContributionGraph />
-            </div>
-          )}
 
           {/* Pinned Projects Section */}
           {!loading && !error && (

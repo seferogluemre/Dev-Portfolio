@@ -9,7 +9,6 @@ import { getTechIcon, getLanguageColor } from "../utils/techIcons";
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-border bg-card/50 backdrop-blur-sm">
-      {/* Project Image */}
       {project.image && (
         <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
           <Image
