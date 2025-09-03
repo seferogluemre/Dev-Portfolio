@@ -1,4 +1,4 @@
-# 🚀 Berat Güdelek - Developer Portfolio
+# 🚀 Emre SEFEROĞLU - Developer Portfolio
 
 <div align="center">
   <img src="public/logo-bg.svg" alt="Logo" width="120" height="120">
@@ -10,7 +10,7 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
   [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://reactjs.org)
   
-  [🌍 Live Demo](https://beratgdlk.com) • [📧 Contact](mailto:beratgdlk@gmail.com)
+  [🌍 Live Demo](https://seferogluemre.com) • [📧 Contact](mailto:seferoglu.yazilim@outlook.com)
 </div>
 
 ---
@@ -342,16 +342,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Berat Güdelek**
-- 🌐 Website: [beratgdlk.com](https://beratgdlk.com)
-- 📧 Email: [beratgdlk@gmail.com](mailto:beratgdlk@gmail.com)
-- 💼 LinkedIn: [linkedin.com/in/beratgudelek](https://www.linkedin.com/in/beratgudelek/)
-- 🐙 GitHub: [github.com/beratgdlk](https://github.com/beratgdlk)
-- 📝 Medium: [medium.com/@beratgdlk](https://medium.com/@beratgdlk)
+**Emre SEFEROĞLU**
+- 🌐 Website: [seferoglu.yazilim@outlook.com](https://seferogluemre.com)
+- 📧 Email: [seferoglu.yazilim@outlook.com](mailto:seferoglu.yazilim@outlook.com)
+- 💼 LinkedIn: [linkedin.com/in/seferogluemre](https://www.linkedin.com/in/seferogluemre/)
+- 🐙 GitHub: [github.com/seferogluemre](https://github.com/seferogluemre)
+- 📝 Medium: [medium.com/@seferogluemre](https://medium.com/@seferogluemre)
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by <strong>Berat Güdelek</strong></p>
+  <p>Made with ❤️ by <strong>Emre SEFEROĞLU</strong></p>
   <p>⭐ Star this repo if you found it helpful!</p>
 </div>
