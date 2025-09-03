@@ -17,30 +17,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Yunus Emre SEFEROĞLU - Fullstack Software Developer",
   description: "Fullstack web developer sharing experiences and learnings about backend, frontend, and mobile app development.",
-  icons: [
-    {
-      rel: 'icon',
-      url: '/emre-seferoglu-light-logo.ico',
-      media: '(prefers-color-scheme: light)',
-    },
-    {
-      rel: 'icon',
-      url: '/emre-seferoglu-dark-logo.ico',
-      media: '(prefers-color-scheme: dark)',
-    },
-    {
-      rel: 'icon',
-      url: '/emre-seferoglu-dark-logo.ico', // Default fallback
-    },
-    {
-      rel: 'shortcut icon',
-      url: '/emre-seferoglu-dark-logo.ico',
-    },
-    {
-      rel: 'apple-touch-icon',
-      url: '/emre-seferoglu-dark-logo.ico',
-    },
-  ],
 };
 
 export default function RootLayout({
