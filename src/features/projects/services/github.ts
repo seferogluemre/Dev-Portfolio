@@ -450,7 +450,7 @@ export class GitHubService {
   private getMockContributions(): ContributionStats {
     const contributions: ContributionDay[] = [];
     const today = new Date();
-    // Daha yüksek kontrastlı ve belirgin yeşil tonları
+    // green colors
     const colors = ['#f0f0f0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
     const textPattern = this.getTextPattern();
     
