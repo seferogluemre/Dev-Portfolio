@@ -101,26 +101,25 @@ export default function AboutSection({ data }: AboutSectionProps) {
                   </div>
                 </div>
               </Card>
-              {/* Technology Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                {/* Python & Scripting */}
                 <Card className="p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
                       <Code2 className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2">Python & Scripting</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Python</h4>
                       <div className="flex flex-wrap gap-2 mb-2">
                         <Badge variant="secondary" className="text-xs">Python</Badge>
                         <Badge variant="secondary" className="text-xs">Scripts</Badge>
                         <Badge variant="secondary" className="text-xs">OOP</Badge>
                         <Badge variant="secondary" className="text-xs">Django</Badge>
+                        <Badge variant="secondary" className="text-xs">Flask</Badge>
                         <Badge variant="secondary" className="text-xs">PyQt5</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Orta seviye Python ile script geliştirme, web ve masaüstü uygulamaları
+                        Python ile script geliştirme, web ve masaüstü uygulamaları
                       </p>
                     </div>
                   </div>
@@ -140,6 +139,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
                         <Badge variant="secondary" className="text-xs">C#</Badge>
                         <Badge variant="secondary" className="text-xs">Java</Badge>
                         <Badge variant="secondary" className="text-xs">C++</Badge>
+                        <Badge variant="secondary" className="text-xs">Python</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Çoklu dil deneyimi ile farklı platformlarda geliştirme
@@ -164,7 +164,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
                         <Badge variant="secondary" className="text-xs">Redis</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        SQL ve NoSQL veritabanları ile kapsamlı çalışma deneyimi
+                        SQL veritabanları ile kapsamlı çalışma deneyimi
                       </p>
                     </div>
                   </div>
@@ -181,7 +181,6 @@ export default function AboutSection({ data }: AboutSectionProps) {
                       <div className="flex flex-wrap gap-2 mb-2">
                         <Badge variant="secondary" className="text-xs">AWS</Badge>
                         <Badge variant="secondary" className="text-xs">Docker</Badge>
-                        <Badge variant="secondary" className="text-xs">Container</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Cloud servisleri ve containerization deneyimi
@@ -199,7 +198,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
                     <div className="flex-1">
                       <h4 className="font-semibold text-foreground mb-2">Mobil Geliştirme</h4>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        <Badge variant="secondary" className="text-xs">Android</Badge>
+                        <Badge variant="secondary" className="text-xs">React Native (Expo)</Badge>
                         <Badge variant="secondary" className="text-xs">Java</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">

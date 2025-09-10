@@ -31,9 +31,6 @@ export function PinnedSection({
         <Pin className="h-5 w-5 text-primary" />
       </div>
 
-      <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-        GitHub profilimde sabitlenmiş öne çıkan projelerim. En çok gurur duyduğum ve üzerinde çalıştığım projeler.
-      </p>
 
       {/* Pinned Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">

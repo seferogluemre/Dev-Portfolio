@@ -14,27 +14,23 @@ export function AllProjectsSection({ otherProjects, showAllProjects }: AllProjec
   const [visibleProjects, setVisibleProjects] = useState<ProjectData[]>([]);
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  // Projeler değiştiğinde filtrelenmiş projeleri güncelle
   useEffect(() => {
     setFilteredProjects(otherProjects);
   }, [otherProjects]);
 
-  // showAllProjects true olduğunda animasyonlu yükleme başlat
   useEffect(() => {
     if (showAllProjects && filteredProjects.length > 0) {
       setVisibleProjects([]);
       setAnimationComplete(false);
 
-      // Her proje için sıralı animasyon
       filteredProjects.forEach((project, index) => {
         setTimeout(() => {
           setVisibleProjects(prev => [...prev, project]);
           
-          // Son proje yüklendiyse animasyon tamamlandı
           if (index === filteredProjects.length - 1) {
             setTimeout(() => setAnimationComplete(true), 300);
           }
-        }, index * 150); // Her proje 150ms arayla yüklenir
+        }, index * 150); 
       });
     } else if (!showAllProjects) {
       setVisibleProjects([]);
@@ -42,7 +38,6 @@ export function AllProjectsSection({ otherProjects, showAllProjects }: AllProjec
     }
   }, [showAllProjects, filteredProjects]);
 
-  // Filtreleme değiştiğinde visible projeleri güncelle
   useEffect(() => {
     if (showAllProjects && animationComplete) {
       setVisibleProjects(filteredProjects);
@@ -64,11 +59,7 @@ export function AllProjectsSection({ otherProjects, showAllProjects }: AllProjec
         <FolderOpen className="h-5 w-5 text-primary" />
       </div>
 
-      <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-        GitHub hesabımda bulunan tüm public projelerim. Arama ve filtreleme özellikleri ile istediğiniz projeyi kolayca bulabilirsiniz.
-      </p>
 
-      {/* Search and Filters */}
       {otherProjects.length > 0 && (
         <ProjectFilters 
           projects={otherProjects} 

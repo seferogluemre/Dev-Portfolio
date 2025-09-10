@@ -33,10 +33,7 @@ export default function ProjectsPage() {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
               {t.projects}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-              GitHub hesabımdan otomatik olarak çekilen projelerim. Pinned projeler ve tüm repository&apos;lerim.
-            </p>
-            
+
             {/* Refresh Button */}
             <Button
               onClick={refetch}
