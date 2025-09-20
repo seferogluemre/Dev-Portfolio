@@ -17,6 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Yunus Emre SEFEROĞLU - Fullstack Software Developer",
   description: "Fullstack web developer sharing experiences and learnings about backend, frontend, and mobile app development.",
+  icons: {
+    icon: [
+      {
+        url: "/emre-seferoglu-dark-logo.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
