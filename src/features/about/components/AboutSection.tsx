@@ -116,7 +116,6 @@ export default function AboutSection({ data }: AboutSectionProps) {
                         <Badge variant="secondary" className="text-xs">OOP</Badge>
                         <Badge variant="secondary" className="text-xs">Django</Badge>
                         <Badge variant="secondary" className="text-xs">Flask</Badge>
-                        <Badge variant="secondary" className="text-xs">PyQt5</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Python ile script geliştirme, web ve masaüstü uygulamaları
@@ -202,7 +201,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
                         <Badge variant="secondary" className="text-xs">Java</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Android uygulamaları geliştirme deneyimi
+                        Mobil uygulamala geliştirme deneyimi
                       </p>
                     </div>
                   </div>
