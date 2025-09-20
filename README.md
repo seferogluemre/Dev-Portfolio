@@ -1,7 +1,7 @@
 # 🚀 Emre SEFEROĞLU - Developer Portfolio
 
 <div align="center">
-  <img src="public/logo-bg.svg" alt="Logo" width="120" height="120">
+  <img src="public/emre-seferoglu-dark-logo.svg" alt="Logo" width="120" height="120">
   
   **Modern, responsive portfolio website built with Next.js 15 and TypeScript**
   
@@ -158,7 +158,7 @@ This project follows **enterprise-level architectural patterns**:
 ### **1️⃣ Clone & Install**
 ```bash
 # Clone the repository
-git clone https://github.com/beratgdlk/dev-portfolio.git
+git clone https://github.com/seferogluemre/Dev-Portfolio.git
 
 # Navigate to directory
 cd dev-portfolio
@@ -280,7 +280,7 @@ No environment variables are required for basic setup. All configuration is hand
 ## 🌐 Deployment
 
 ### **Vercel (Recommended)**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/beratgdlk/dev-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/seferogluemre/Dev-Portfolio)
 
 ```bash
 npm install -g vercel
